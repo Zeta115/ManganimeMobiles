@@ -42,45 +42,6 @@ class UserScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.black87,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.person, color: Colors.orange),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: const Icon(Icons.my_library_books, color: Colors.white),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MangaScreen()),
-                );
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.tv_outlined, color: Colors.white),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AnimeScreen()),
-                );
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.list_alt, color: Colors.white),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => CharacterScreen()),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

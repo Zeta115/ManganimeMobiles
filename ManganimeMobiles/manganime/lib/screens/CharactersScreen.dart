@@ -8,14 +8,6 @@ import 'package:manganime/widgets/nav_bar.dart';
 class CharacterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Characters Screen'),
-      ),
-      body: const SingleChildScrollView(
-        child: Column(),
-      ),
-      bottomNavigationBar: NavBar(),
-    );
+    return Placeholder();
   }
 }
