@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:manganime/screens/AnimeScreen.dart';
-import 'package:manganime/screens/CharactersScreen.dart';
-import 'package:manganime/screens/UserScreen.dart';
 
 class MangaScreen extends StatelessWidget {
+  const MangaScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Manga Screen'),
-      ),
-      body: SingleChildScrollView(
+    return SingleChildScrollView(
         child: Column(),
-      ),
     );
   }
 }

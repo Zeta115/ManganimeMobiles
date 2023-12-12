@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:manganime/screens/AnimeScreen.dart';
-import 'package:manganime/screens/MangaScreen.dart';
-import 'package:manganime/screens/UserScreen.dart';
-
-import 'package:manganime/widgets/nav_bar.dart';
 
 class CharacterScreen extends StatelessWidget {
+  const CharacterScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Placeholder();

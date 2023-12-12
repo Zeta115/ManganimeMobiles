@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:manganime/screens/AnimeScreen.dart';
-import 'package:manganime/screens/CharactersScreen.dart';
-import 'package:manganime/screens/MangaScreen.dart';
 
+// TODO: The app maybe do all in english? The api info is in english
+// [W]: no deberia haber ninguna línea azul/verde... que signifique warning de alguna cosa. Ctrl + .
+// debería servir en la mayoria de casos para solucionarlo
 class UserScreen extends StatelessWidget {
+  const UserScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('User'),
-      ),
-      body: SingleChildScrollView(
+    return SingleChildScrollView(
         child: Column(
           children: [
             const Align(
@@ -41,7 +39,6 @@ class UserScreen extends StatelessWidget {
             )
           ],
         ),
-      ),
     );
   }
 }
