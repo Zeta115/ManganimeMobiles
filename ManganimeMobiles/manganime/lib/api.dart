@@ -24,20 +24,23 @@ Future<List<Anime>> apiAsyncLoadListAnimes() async {
 }
 
 Future<List<Manga>> apiAsyncLoadListMangas() async {
-  final url = Uri.parse("https://api.jikan.moe/v4/manga/1/full");
-  final futureResponse = await http.get(url);
-
-  final json = jsonDecode(futureResponse.body);
-
-  final jsonMangaList = json["data"];
-
   final List<Manga> mangaList = [];
 
-  for (final jsonManga in jsonMangaList) {
-    final manga = Manga.fromJson(jsonManga);
-    mangaList.add(manga);
-  }
+  for (int listado = 1; listado < 3; listado++) {
+    final url = Uri.parse("https://api.jikan.moe/v4/manga/$listado/full");
 
-  debugPrint(mangaList.toString());
+    if (Map<String, dynamic> != Null) {
+      final futureResponse = await http.get(url);
+
+      final json = jsonDecode(futureResponse.body);
+
+      final jsonManga = json["data"];
+
+      final manga = Manga.fromJson(jsonManga);
+      mangaList.add(manga);
+
+      debugPrint(mangaList.toString());
+    }
+  }
   return mangaList;
 }
