@@ -21,25 +21,14 @@ class _MangaListItemState extends State<MangaListItem> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              Navigator.of(context).pushNamed(
-                "/chapter",
-                arguments: widget.manga, // Passo el número...
-              );
-              debugPrint(widget.manga.title);
-            });
-          },
-          child: Container(
-            height: 150,
-            width: 450,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(5)),
-              image: DecorationImage(
-                image: NetworkImage(widget.manga.image),
-                fit: BoxFit.fitWidth,
-              ),
+        Container(
+          height: 150,
+          width: 450,
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
+            image: DecorationImage(
+              image: NetworkImage(widget.manga.image),
+              fit: BoxFit.fitWidth,
             ),
           ),
         ),
