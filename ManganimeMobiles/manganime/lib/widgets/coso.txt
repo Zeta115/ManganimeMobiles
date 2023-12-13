@@ -1,0 +1,12 @@
+ListView.builder(
+            itemCount: animeList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return AnimeListItem(anime: animeList[index]);
+            });
+			
+			
+	ListTile(
+      title: Text(anime.title),
+      subtitle: Text(anime.status),
+      leading: Image(image: NetworkImage(anime.image)),
+    );
