@@ -28,7 +28,7 @@ class AnimeScreen extends StatelessWidget {
           value: snapshot.data!,
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
-              return AnimeGrid();
+              return AnimeGrid(count: (constraints.maxWidth / (225 + 20)).round());
             },
           ),
         );

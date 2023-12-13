@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:manganime/models/anime.dart';
 
-class AnimeListItem extends StatelessWidget {
+class AnimeListItem extends StatefulWidget {
   const AnimeListItem({
     super.key,
     required this.anime,
@@ -12,18 +12,42 @@ class AnimeListItem extends StatelessWidget {
   final Anime anime;
 
   @override
+  State<AnimeListItem> createState() => _AnimeListItemState();
+}
+
+class _AnimeListItemState extends State<AnimeListItem> {
+  @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(anime.title),
-      subtitle: Text(anime.status),
-      leading: Image(image: NetworkImage(anime.image)),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              debugPrint(widget.anime.title);
+            });
+          },
+          child: Container(
+            height: 150,
+            width: 450,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              image: DecorationImage(
+                image: NetworkImage(widget.anime.image),
+                fit: BoxFit.fitWidth,
+              ),
+            ),
+          ),
+        ),
+        Text(widget.anime.title),
+        Text(widget.anime.status),
+      ],
     );
   }
 }
 
 class AnimeGrid extends StatefulWidget {
   AnimeGrid({this.count = 3, super.key});
-
   int count;
 
   @override
@@ -33,19 +57,17 @@ class AnimeGrid extends StatefulWidget {
 class _AnimeGridState extends State<AnimeGrid> {
   @override
   Widget build(BuildContext context) {
-  final animeList = context.read<List<Anime>>();
+    final List<Anime> animeList = context.read<List<Anime>>();
     return GridView.count(
       primary: false,
       padding: const EdgeInsets.all(20),
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
-      crossAxisCount: 2,
-      children: <Widget>[
-        Container(
-          padding: const EdgeInsets.all(8),
-          color: Colors.teal[100],
-          child: const Text("He'd have you all unravel at the"),
-        ),
+      childAspectRatio: 1,
+      crossAxisCount: widget.count,
+      children: [
+        for (int i = 0; i < animeList.length; i++)
+          AnimeListItem(anime: animeList[i]),
       ],
     );
   }
