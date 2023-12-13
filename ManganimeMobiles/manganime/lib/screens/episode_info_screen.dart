@@ -32,38 +32,49 @@ class _EpisodeInfoScreenState extends State<EpisodeInfoScreen> {
                 });
               },
               child: Icon(
-                (anime.favourite == true) ? Icons.favorite : Icons.abc,
+                (anime.favourite == true) ? Icons.favorite : Icons.favorite_border_rounded,
                 size: 26.0,
               ),
             ),
           ),
         ],
       ),
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              Container(
-                width: screenSize.width,
-                height: 200,
-                color: Colors.amber,
-                // TODO: video player
-              ),
-              Column(
-                children: [
-                  Text("Synopsis: ${anime.synopsis}",
-                      style: TextStyle(fontSize: 14)),
-                  Row(
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Column(
+              children: [
+                Container(
+                  width: screenSize.width,
+                  height: 200,
+                  color: Colors.amber,
+                  // TODO: video player
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                  child: Column(
                     children: [
-                      Icon(Icons.stream_rounded),
-                      Text("data"),
+                      Text("Synopsis: ${anime.synopsis}",
+                          style: TextStyle(fontSize: 14)),
+                      SizedBox(height: 20,),
+                      Row(
+                        children: [
+                          Icon(Icons.stream_rounded),
+                          Text("data"),
+
+                          
+                          Icon(Icons.all_out),
+                          Text("data"),
+                        ],
+                      ),
                     ],
                   ),
-                ],
-              ),
-            ],
-          )
-        ],
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
