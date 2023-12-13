@@ -24,6 +24,10 @@ class _AnimeListItemState extends State<AnimeListItem> {
         GestureDetector(
           onTap: () {
             setState(() {
+              Navigator.of(context).pushNamed(
+                  "/episode",
+                  arguments: widget.anime, // Passo el número...
+                );
               debugPrint(widget.anime.title);
             });
           },
@@ -31,7 +35,7 @@ class _AnimeListItemState extends State<AnimeListItem> {
             height: 150,
             width: 450,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
+              borderRadius: const BorderRadius.all(Radius.circular(5)),
               image: DecorationImage(
                 image: NetworkImage(widget.anime.image),
                 fit: BoxFit.fitWidth,
