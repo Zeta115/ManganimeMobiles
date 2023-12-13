@@ -25,7 +25,7 @@ class _MangaListItemState extends State<MangaListItem> {
           onTap: () {
             setState(() {
               Navigator.of(context).pushNamed(
-                "/episode",
+                "/chapter",
                 arguments: widget.manga, // Passo el número...
               );
               debugPrint(widget.manga.title);
@@ -55,10 +55,10 @@ class MangaGrid extends StatefulWidget {
   int count;
 
   @override
-  State<MangaGrid> createState() => _AnimeGridState();
+  State<MangaGrid> createState() => _MangaGridState();
 }
 
-class _AnimeGridState extends State<MangaGrid> {
+class _MangaGridState extends State<MangaGrid> {
   @override
   Widget build(BuildContext context) {
     final List<Manga> mangaList = context.read<List<Manga>>();
