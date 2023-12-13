@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:manganime/models/anime.dart';
-import 'package:video_player/video_player.dart';
+// import 'package:video_player/video_player.dart';
 
 class EpisodeInfoScreen extends StatefulWidget {
   const EpisodeInfoScreen({super.key});

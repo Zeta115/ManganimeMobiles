@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:manganime/models/anime.dart';
+import 'package:manganime/models/manga.dart';
 
 Future<List<Anime>> apiAsyncLoadListAnimes() async {
   final url = Uri.parse("https://api.jikan.moe/v4/seasons/now");
@@ -22,14 +23,21 @@ Future<List<Anime>> apiAsyncLoadListAnimes() async {
   return animeList;
 }
 
-Future<Anime> apiAsyncLoadAnime(int id) async {
-  final url = Uri.parse("https://api.jikan.moe/v4/anime/$id}");
+Future<List<Manga>> apiAsyncLoadListMangas() async {
+  final url = Uri.parse("https://api.jikan.moe/v4/manga/{id}/full");
   final futureResponse = await http.get(url);
 
   final json = jsonDecode(futureResponse.body);
 
-  final anime = json["data"];
+  final jsonMangaList = json["data"];
 
-  debugPrint(anime.toString());
-  return anime;
+  final List<Manga> mangaList = [];
+
+  for (final jsonManga in jsonMangaList) {
+    final manga = Manga.fromJson(jsonManga);
+    mangaList.add(manga);
+  }
+
+  debugPrint(mangaList.toString());
+  return mangaList;
 }
