@@ -13,31 +13,56 @@ class _EpisodeInfoScreenState extends State<EpisodeInfoScreen> {
   @override
   Widget build(BuildContext context) {
     final Anime anime = ModalRoute.of(context)!.settings.arguments as Anime;
+    final screenSize = MediaQuery.of(context).size;
 
     //late VideoPlayerController _controller;
     //late Future<void> _initializeVideoPlayerFuture;
 
     return Scaffold(
-      appBar: AppBar(title: Text(anime.title)),
+      appBar: AppBar(
+        title: Text(anime.title),
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(right: 20.0),
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  anime.favourite = !anime.favourite;
+                  debugPrint("$anime.favourite");
+                });
+              },
+              child: Icon(
+                (anime.favourite == true) ? Icons.favorite : Icons.abc,
+                size: 26.0,
+              ),
+            ),
+          ),
+        ],
+      ),
       body: Stack(
         children: [
-          Container(
-              // TODO: video player
-              ),
-          Row(
+          Column(
             children: [
               Container(
-                // TODO: width
-                child: Column(
-                  children: [
-                    Text("Synopsis: ${anime.synopsis}",
-                        style: TextStyle(fontSize: 14))
-                  ],
-                ),
+                width: screenSize.width,
+                height: 200,
+                color: Colors.amber,
+                // TODO: video player
               ),
-              Column(children: []),
+              Column(
+                children: [
+                  Text("Synopsis: ${anime.synopsis}",
+                      style: TextStyle(fontSize: 14)),
+                  Row(
+                    children: [
+                      Icon(Icons.stream_rounded),
+                      Text("data"),
+                    ],
+                  ),
+                ],
+              ),
             ],
-          ),
+          )
         ],
       ),
     );

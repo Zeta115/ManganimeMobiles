@@ -51,8 +51,8 @@ class _AnimeListItemState extends State<AnimeListItem> {
 }
 
 class AnimeGrid extends StatefulWidget {
-  AnimeGrid({this.count = 3, super.key});
-  int count;
+  const AnimeGrid({this.count = 3, super.key});
+  final int count;
 
   @override
   State<AnimeGrid> createState() => _AnimeGridState();
