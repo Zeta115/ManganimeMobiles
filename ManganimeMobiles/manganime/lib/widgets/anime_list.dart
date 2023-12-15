@@ -48,7 +48,7 @@ class _AnimeListItemState extends State<AnimeListItem> {
           title: Text(
             widget.anime.title,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontWeight: FontWeight.w500),
+            style: const TextStyle(fontWeight: FontWeight.w500),
           ),
           subtitle: Text(widget.anime.status),
         ),

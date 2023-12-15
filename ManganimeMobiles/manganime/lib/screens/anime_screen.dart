@@ -10,7 +10,7 @@ import 'package:manganime/Widgets/anime_header.dart';
 //https://pub.dev/packages/flutter_image_slideshow/example
 
 class AnimeScreen extends StatelessWidget {
-  AnimeScreen({super.key});
+  const AnimeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +40,18 @@ class AnimeScreen extends StatelessWidget {
                 autoPlayInterval: 3000,
                 isLoop: true,
                 children: [
-                  AnimeHeader(anime: snapshot.data![0][0],),
-                  AnimeHeader(anime: snapshot.data![0][1],),
-                  AnimeHeader(anime: snapshot.data![0][2],),
-                  AnimeHeader(anime: snapshot.data![0][3],),
+                  AnimeHeader(
+                    anime: snapshot.data![0][0],
+                  ),
+                  AnimeHeader(
+                    anime: snapshot.data![0][1],
+                  ),
+                  AnimeHeader(
+                    anime: snapshot.data![0][2],
+                  ),
+                  AnimeHeader(
+                    anime: snapshot.data![0][3],
+                  ),
                 ],
               ),
               const Divider(),

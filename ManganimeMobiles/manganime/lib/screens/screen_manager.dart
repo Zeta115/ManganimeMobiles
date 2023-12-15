@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:manganime/screens/anime_screen.dart';
 import 'package:manganime/screens/manga_screen.dart';
@@ -19,7 +20,7 @@ class _MainScreensState extends State<MainScreens> {
 
   // Must be in the same order than the nav var items
   Set<Widget> screens_ = {
-    AnimeScreen(),
+    const AnimeScreen(),
     const MangaScreen(),
     const CharacterScreen(),
     const UserScreen()
@@ -33,21 +34,26 @@ class _MainScreensState extends State<MainScreens> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black87,
-        currentIndex: currentScreen,
-        unselectedItemColor: Colors.white70,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          navBarItem("Anime", Icons.dangerous),
-          navBarItem("Manga", Icons.dangerous),
-          navBarItem("Characters", Icons.dangerous),
-          navBarItem("User", Icons.dangerous)
-        ],
-        onTap: setSelectedScreen,
+    final screenSize = MediaQuery.of(context).size;
+    
+    return Provider.value(
+      value: screenSize,
+      child: Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Colors.black87,
+          currentIndex: currentScreen,
+          unselectedItemColor: Colors.white70,
+          type: BottomNavigationBarType.fixed,
+          items: [
+            navBarItem("Anime", Icons.dangerous),
+            navBarItem("Manga", Icons.dangerous),
+            navBarItem("Characters", Icons.dangerous),
+            navBarItem("User", Icons.dangerous)
+          ],
+          onTap: setSelectedScreen,
+        ),
+        body: screens_.elementAt(currentScreen),
       ),
-      body: screens_.elementAt(currentScreen),
     );
   }
 }
