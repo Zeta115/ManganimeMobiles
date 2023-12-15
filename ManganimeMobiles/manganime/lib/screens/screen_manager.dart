@@ -19,7 +19,7 @@ class _MainScreensState extends State<MainScreens> {
 
   // Must be in the same order than the nav var items
   Set<Widget> screens_ = {
-    const AnimeScreen(),
+    AnimeScreen(),
     const MangaScreen(),
     const CharacterScreen(),
     const UserScreen()

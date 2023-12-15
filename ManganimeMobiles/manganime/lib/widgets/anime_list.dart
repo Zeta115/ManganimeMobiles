@@ -43,8 +43,15 @@ class _AnimeListItemState extends State<AnimeListItem> {
             ),
           ),
         ),
-        Text(widget.anime.title),
-        Text(widget.anime.status),
+        ListTile(
+          title: Text(widget.anime.title,
+            style: TextStyle(fontWeight: FontWeight.w500),
+          ),
+          subtitle:Text(widget.anime.status),
+        ),
+    
+        //Text(widget.anime.title),
+        //Text(widget.anime.status),
       ],
     );
   }
