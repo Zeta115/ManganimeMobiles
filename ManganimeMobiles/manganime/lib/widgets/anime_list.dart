@@ -20,14 +20,15 @@ class _AnimeListItemState extends State<AnimeListItem> {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.max,
       children: [
         GestureDetector(
           onTap: () {
             setState(() {
               Navigator.of(context).pushNamed(
-                  "/episode",
-                  arguments: widget.anime, // Passo el número...
-                );
+                "/episode",
+                arguments: widget.anime, // Passo el número...
+              );
               debugPrint(widget.anime.title);
             });
           },
@@ -38,20 +39,19 @@ class _AnimeListItemState extends State<AnimeListItem> {
               borderRadius: const BorderRadius.all(Radius.circular(5)),
               image: DecorationImage(
                 image: NetworkImage(widget.anime.image),
-                fit: BoxFit.fitWidth,
+                fit: BoxFit.cover,
               ),
             ),
           ),
         ),
         ListTile(
-          title: Text(widget.anime.title,
+          title: Text(
+            widget.anime.title,
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(fontWeight: FontWeight.w500),
           ),
-          subtitle:Text(widget.anime.status),
+          subtitle: Text(widget.anime.status),
         ),
-    
-        //Text(widget.anime.title),
-        //Text(widget.anime.status),
       ],
     );
   }
