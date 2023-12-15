@@ -26,21 +26,24 @@ Future<List<Anime>> apiAsyncLoadListAnimes() async {
 Future<List<Manga>> apiAsyncLoadListMangas() async {
   final List<Manga> mangaList = [];
 
-  for (int listado = 1; listado < 3; listado++) {
+  for (int listado = 1; listado < 150; listado++) {
     final url = Uri.parse("https://api.jikan.moe/v4/manga/$listado/full");
+    final futureResponse = await http.get(url);
 
-    if (Map<String, dynamic> != Null) {
-      final futureResponse = await http.get(url);
+    final json = jsonDecode(futureResponse.body);
+    final jsonManga = json["data"];
 
-      final json = jsonDecode(futureResponse.body);
+    // Verificar si jsonManga es nulo antes de intentar crear el objeto Manga
+    final manga = jsonManga != null ? Manga.fromJson(jsonManga) : null;
 
-      final jsonManga = json["data"];
-
-      final manga = Manga.fromJson(jsonManga);
+// Hay muchas entradas con chapters=null asi que solo voy a comprobar que la entrada existe
+    if (manga != null) {
       mangaList.add(manga);
-
       debugPrint(mangaList.toString());
+    } else {
+      listado = listado++;
     }
   }
+
   return mangaList;
 }

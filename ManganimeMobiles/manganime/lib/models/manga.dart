@@ -1,5 +1,5 @@
 class Manga {
-  int id, popularity;
+  int? id, chapters;
   String title, synopsis, image, type, status;
   bool favourite;
 
@@ -8,9 +8,9 @@ class Manga {
         title = json["title"],
         image = json["images"]["jpg"]["image_url"],
         type = json["type"],
+        chapters = json["chapters"],
         synopsis = json["synopsis"] ??
             "No synopsis information has been added to this title.",
         status = json["status"],
-        popularity = json["popularity"],
         favourite = false;
 }
