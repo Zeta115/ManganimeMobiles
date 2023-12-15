@@ -34,6 +34,9 @@ class _MangaListItemState extends State<MangaListItem> {
         ),
         Text(widget.manga.title),
         Text(widget.manga.status),
+        Text(
+          'Número de capítulos: ${widget.manga.chapters.toString()}',
+        )
       ],
     );
   }
