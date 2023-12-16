@@ -1,0 +1,7 @@
+{
+  "group_name": "The Incredibles",
+  "members": [
+    { "dni": "49636810G", "first": "Sara", "last": "Martínez" },
+    { "dni": "87654321K", "first": "Pol", "last": "Parr" }
+  ]
+}
