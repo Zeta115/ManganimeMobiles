@@ -52,9 +52,33 @@ class AnimeScreen extends StatelessWidget {
                   AnimeHeader(
                     anime: snapshot.data![0][3],
                   ),
+                  AnimeHeader(
+                    anime: snapshot.data![0][4],
+                  ),
+                  AnimeHeader(
+                    anime: snapshot.data![0][5],
+                  ),
                 ],
               ),
               const Divider(),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  const Text(
+                    "Latest episodes",
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                  const Text(
+                    "Most popular",
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                  const Text(
+                    "By genre",
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
               Expanded(
                 child: LayoutBuilder(
                   builder: (BuildContext context, BoxConstraints constraints) {
