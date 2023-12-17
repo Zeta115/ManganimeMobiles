@@ -8,8 +8,6 @@ import 'package:manganime/models/anime.dart';
 import 'package:manganime/widgets/anime_list.dart';
 import 'package:manganime/Widgets/anime_header.dart';
 
-//https://pub.dev/packages/flutter_image_slideshow/example
-
 class AnimeScreen extends StatelessWidget {
   const AnimeScreen({super.key});
 
@@ -18,8 +16,7 @@ class AnimeScreen extends StatelessWidget {
     return FutureBuilder<List<List<Anime>>>(
       future: Future.wait([
         apiAsyncLoadListAnimes(),
-        //apiAsyncLoadTopAnimes(),
-      ]), // Get API information and create an Anime structure
+      ]),
       builder: (
         BuildContext context,
         AsyncSnapshot<List<List<Anime>>> snapshot,

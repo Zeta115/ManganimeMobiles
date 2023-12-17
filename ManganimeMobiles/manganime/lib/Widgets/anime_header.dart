@@ -18,13 +18,13 @@ class AnimeHeader extends StatefulWidget {
 class _AnimeHeaderState extends State<AnimeHeader> {
   @override
   Widget build(BuildContext context) {
-  final screenSize = context.read<Size>();
+    final screenSize = context.read<Size>();
     return GestureDetector(
       onTap: () {
         setState(() {
           Navigator.of(context).pushNamed(
             "/episode",
-            arguments: widget.anime, // Passo el número...
+            arguments: widget.anime,
           );
           debugPrint(widget.anime.title);
         });
@@ -64,7 +64,8 @@ class _AnimeHeaderState extends State<AnimeHeader> {
             Align(
               alignment: Alignment.bottomLeft,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 20.0),
                 child: Text(
                   widget.anime.title,
                   style: const TextStyle(

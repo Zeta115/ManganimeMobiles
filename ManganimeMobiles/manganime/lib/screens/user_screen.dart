@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-// TODO: The app maybe do all in english? The api info is in english,   roger that
-// [W]: no deberia haber ninguna línea azul/verde... que signifique warning de alguna cosa. Ctrl + .,   es sobretodo el tema de los const no?
-// debería servir en la mayoria de casos para solucionarlo
 class UserScreen extends StatelessWidget {
   const UserScreen({super.key});
 
@@ -13,7 +10,7 @@ class UserScreen extends StatelessWidget {
         children: [
           const Align(
             alignment: Alignment.topCenter,
-            child: Text("User name",
+            child: Text("User name, site under construction",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           ),
           Align(

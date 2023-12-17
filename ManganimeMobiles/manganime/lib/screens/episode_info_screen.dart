@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:manganime/models/anime.dart';
-// import 'package:video_player/video_player.dart';
 
 class EpisodeInfoScreen extends StatefulWidget {
   const EpisodeInfoScreen({super.key});
@@ -14,9 +13,6 @@ class _EpisodeInfoScreenState extends State<EpisodeInfoScreen> {
   Widget build(BuildContext context) {
     final Anime anime = ModalRoute.of(context)!.settings.arguments as Anime;
     final screenSize = MediaQuery.of(context).size;
-
-    //late VideoPlayerController _controller;
-    //late Future<void> _initializeVideoPlayerFuture;
 
     return Scaffold(
       appBar: AppBar(
@@ -32,7 +28,9 @@ class _EpisodeInfoScreenState extends State<EpisodeInfoScreen> {
                 });
               },
               child: Icon(
-                (anime.favourite == true) ? Icons.favorite : Icons.favorite_border_rounded,
+                (anime.favourite == true)
+                    ? Icons.favorite
+                    : Icons.favorite_border_rounded,
                 size: 26.0,
               ),
             ),
@@ -48,7 +46,6 @@ class _EpisodeInfoScreenState extends State<EpisodeInfoScreen> {
                   width: screenSize.width,
                   height: 200,
                   color: Colors.amber,
-                  // TODO: video player
                 ),
                 Padding(
                   padding:
@@ -57,13 +54,13 @@ class _EpisodeInfoScreenState extends State<EpisodeInfoScreen> {
                     children: [
                       Text("Synopsis: ${anime.synopsis}",
                           style: TextStyle(fontSize: 14)),
-                      SizedBox(height: 20,),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Row(
                         children: [
                           Icon(Icons.stream_rounded),
                           Text("data"),
-
-                          
                           Icon(Icons.all_out),
                           Text("data"),
                         ],

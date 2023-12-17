@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:manganime/custom_icons/search_icon.dart';
-//import CustomIcons from '../lib/custom_icons/my_flutter_app_icons.dart'
 
 class SearchBarWidget extends StatefulWidget {
   const SearchBarWidget({
@@ -29,9 +28,11 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           onChanged: (_) {
             controller.openView();
           },
-          //leading: const Icon(Icons.search),
           trailing: const <Widget>[
-            Icon(CustomIcons.search, color: Colors.cyan,)
+            Icon(
+              CustomIcons.search,
+              color: Colors.cyan,
+            )
           ],
         );
       }, suggestionsBuilder:

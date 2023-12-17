@@ -27,7 +27,7 @@ class _AnimeListItemState extends State<AnimeListItem> {
             setState(() {
               Navigator.of(context).pushNamed(
                 "/episode",
-                arguments: widget.anime, // Passo el número...
+                arguments: widget.anime,
               );
               debugPrint(widget.anime.title);
             });

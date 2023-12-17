@@ -18,7 +18,6 @@ class MainScreens extends StatefulWidget {
 class _MainScreensState extends State<MainScreens> {
   int currentScreen = 0;
 
-  // Must be in the same order than the nav var items
   Set<Widget> screens_ = {
     const AnimeScreen(),
     const MangaScreen(),
