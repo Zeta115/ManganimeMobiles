@@ -35,7 +35,7 @@ class _MainScreensState extends State<MainScreens> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    
+
     return Provider.value(
       value: screenSize,
       child: Scaffold(
@@ -46,9 +46,9 @@ class _MainScreensState extends State<MainScreens> {
           type: BottomNavigationBarType.fixed,
           items: [
             navBarItem("Anime", Icons.dangerous),
-            navBarItem("Manga", Icons.dangerous),
-            navBarItem("Characters", Icons.dangerous),
-            navBarItem("User", Icons.dangerous)
+            navBarItem("Manga", Icons.shelves),
+            navBarItem("Characters", Icons.list),
+            navBarItem("User", Icons.person)
           ],
           onTap: setSelectedScreen,
         ),

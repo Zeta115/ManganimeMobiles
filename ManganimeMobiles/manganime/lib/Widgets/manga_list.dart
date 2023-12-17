@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'package:manganime/models/manga.dart';
 
@@ -36,7 +35,7 @@ class _MangaListItemState extends State<MangaListItem> {
             });
           },
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Container(

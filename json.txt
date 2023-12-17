@@ -1,7 +1,7 @@
 {
-  "group_name": "The Incredibles",
+  "group_name": "Otaku Realm Team",
   "members": [
     { "dni": "49636810G", "first": "Sara", "last": "Martínez" },
-    { "dni": "87654321K", "first": "Pol", "last": "Parr" }
+    { "dni": "39932833A", "first": "Pol", "last": "Pallares" }
   ]
 }
