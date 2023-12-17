@@ -5,16 +5,13 @@ import 'package:manganime/api.dart';
 import 'package:manganime/models/manga.dart';
 import 'package:manganime/widgets/manga_list.dart';
 
-//https://pub.dev/packages/smooth_page_indicator
-
 class MangaScreen extends StatelessWidget {
-  const MangaScreen({super.key});
+  const MangaScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future:
-          apiAsyncLoadListMangas(), // Get API information and create a Manga structure
+      future: apiAsyncLoadListMangas(),
       builder: (
         BuildContext context,
         AsyncSnapshot<List<Manga>> snapshot,
@@ -24,12 +21,23 @@ class MangaScreen extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
+
         return Provider.value(
           value: snapshot.data!,
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
-              return MangaGrid(
-                  count: (constraints.maxWidth / (225 + 20)).round());
+              return GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: (constraints.maxWidth / (225 + 20)).round(),
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                  childAspectRatio: 1,
+                ),
+                itemCount: snapshot.data!.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return MangaListItem(manga: snapshot.data![index]);
+                },
+              );
             },
           ),
         );

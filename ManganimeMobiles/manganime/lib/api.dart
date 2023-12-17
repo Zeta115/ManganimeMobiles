@@ -45,11 +45,11 @@ Future<List<Anime>> apiAsyncLoadTopAnimes() async {
   return animeTop;
 }
 
-// ---Manga---
+// Manga
 Future<List<Manga>> apiAsyncLoadListMangas() async {
   final List<Manga> mangaList = [];
 
-  for (int listado = 1; listado < 150; listado++) {
+  for (int listado = 1; listado < 10; listado++) {
     final url = Uri.parse("https://api.jikan.moe/v4/manga/$listado/full");
     final futureResponse = await http.get(url);
 

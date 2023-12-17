@@ -5,9 +5,9 @@ import 'package:manganime/models/manga.dart';
 
 class MangaListItem extends StatefulWidget {
   const MangaListItem({
-    super.key,
+    Key? key,
     required this.manga,
-  });
+  }) : super(key: key);
 
   final Manga manga;
 
@@ -16,14 +16,32 @@ class MangaListItem extends StatefulWidget {
 }
 
 class _MangaListItemState extends State<MangaListItem> {
+  Color iconColor = Colors.grey;
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return ListView(
+      shrinkWrap: true,
       children: [
+        IconButton(
+          icon: Icon(
+            Icons.favorite_outline,
+            color: iconColor,
+            size: 36.0,
+          ),
+          onPressed: () {
+            setState(() {
+              iconColor = iconColor == Colors.grey ? Colors.red : Colors.grey;
+              widget.manga.favourite = true;
+            });
+          },
+        ),
+        SizedBox(
+          height: 10,
+        ),
         Container(
           height: 150,
-          width: 450,
+          width: 650,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(5)),
             image: DecorationImage(
@@ -32,38 +50,24 @@ class _MangaListItemState extends State<MangaListItem> {
             ),
           ),
         ),
-        Text(widget.manga.title),
-        Text(widget.manga.status),
-        Text(
-          'Número de capítulos: ${widget.manga.chapters.toString()}',
-        )
-      ],
-    );
-  }
-}
-
-class MangaGrid extends StatefulWidget {
-  MangaGrid({this.count = 3, super.key});
-  int count;
-
-  @override
-  State<MangaGrid> createState() => _MangaGridState();
-}
-
-class _MangaGridState extends State<MangaGrid> {
-  @override
-  Widget build(BuildContext context) {
-    final List<Manga> mangaList = context.read<List<Manga>>();
-    return GridView.count(
-      primary: false,
-      padding: const EdgeInsets.all(20),
-      crossAxisSpacing: 10,
-      mainAxisSpacing: 10,
-      childAspectRatio: 1,
-      crossAxisCount: widget.count,
-      children: [
-        for (int i = 0; i < mangaList.length; i++)
-          MangaListItem(manga: mangaList[i]),
+        SizedBox(
+          child: ExpansionTile(
+            title: Text(widget.manga.title),
+            children: [
+              ListTile(
+                title: Text(widget.manga.status),
+              ),
+              ListTile(
+                title: Text(
+                  'Número de capítulos: ${widget.manga.chapters.toString()}',
+                ),
+              ),
+              ListTile(
+                title: Text(widget.manga.synopsis),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
