@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manganime/Widgets/search_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
@@ -32,6 +33,25 @@ class AnimeScreen extends StatelessWidget {
           value: snapshot.data![0],
           child: Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 110,
+                      height: 50,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/animeAppLogoFull.png"),
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
+                    const SearchBarWidget(),
+                  ],
+                ),
+              ),
               ImageSlideshow(
                 indicatorColor: Colors.blue,
                 onPageChanged: (value) {
@@ -61,19 +81,19 @@ class AnimeScreen extends StatelessWidget {
                 ],
               ),
               const Divider(),
-              Row(
+              const Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Text(
+                  Text(
                     "Latest episodes",
                     style: TextStyle(fontWeight: FontWeight.w500),
                   ),
-                  const Text(
+                  Text(
                     "Most popular",
                     style: TextStyle(fontWeight: FontWeight.w500),
                   ),
-                  const Text(
+                  Text(
                     "By genre",
                     style: TextStyle(fontWeight: FontWeight.w500),
                   ),

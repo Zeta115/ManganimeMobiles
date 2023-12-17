@@ -73,7 +73,7 @@ class _AnimeGridState extends State<AnimeGrid> {
       primary: false,
       padding: const EdgeInsets.all(20),
       crossAxisSpacing: 10,
-      mainAxisSpacing: 10,
+      mainAxisSpacing: widget.count * 3,
       childAspectRatio: 1,
       crossAxisCount: widget.count,
       children: [
