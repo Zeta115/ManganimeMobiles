@@ -14,4 +14,8 @@ Here is a link to the Github repository:  https://github.com/Zeta115/ManganimeMo
 ## Manga [Pol Pallares]
 // For the manga screen you will se the manga list with their images, a hollow heart on top to mark them as favourites if you want to and the titles, if you click on the title you can now scroll down in the manga entry to see other data such as total chapters, synopsis and status, see the image bellow for visual representation:
 
-![Manga screen example](https://github.com/Zeta115/ManganimeMobiles/blob/main/ManganimeMobiles/manganime/assets/MangaScreenCapture.PNG)
+![Manga screen example]([https://github.com/Zeta115/ManganimeMobiles/blob/main/ManganimeMobiles/manganime/assets/MangaScreenCapture.PNG](https://github.com/Zeta115/ManganimeMobiles/blob/main/Design/MangaScreen.PNG))
+
+We are also preparing a user screen where you can see your favourites:
+
+![User screen design]([https://github.com/Zeta115/ManganimeMobiles/blob/main/ManganimeMobiles/manganime/assets/MangaScreenCapture.PNG](https://github.com/Zeta115/ManganimeMobiles/blob/main/Design/UserScreen.PNG)https://github.com/Zeta115/ManganimeMobiles/blob/main/Design/UserScreen.PNG)
