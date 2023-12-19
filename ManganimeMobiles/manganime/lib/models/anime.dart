@@ -10,7 +10,7 @@ class Anime {
         type = json["type"],
         synopsis = json["synopsis"] ?? "No synopsis information has been added to this title.",
         episodes = json["episodes"],
-        trailer = json["trailer"]["youtube_id"],
+        trailer = json["trailer"]["youtube_id"]?? "No trailer available.",
         status = json["status"],
         popularity = json["popularity"],
         favourite = false;

@@ -44,7 +44,7 @@ class _MainScreensState extends State<MainScreens> {
           unselectedItemColor: Colors.white70,
           type: BottomNavigationBarType.fixed,
           items: [
-            navBarItem("Anime", Icons.dangerous),
+            navBarItem("Anime", Icons.live_tv_rounded),
             navBarItem("Manga", Icons.shelves),
             navBarItem("Characters", Icons.list),
             navBarItem("User", Icons.person)

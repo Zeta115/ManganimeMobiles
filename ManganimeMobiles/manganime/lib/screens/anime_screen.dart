@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:manganime/Widgets/search_bar.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 import 'package:manganime/api.dart';
 import 'package:manganime/models/anime.dart';
 import 'package:manganime/widgets/anime_list.dart';
-import 'package:manganime/Widgets/anime_header.dart';
+import 'package:manganime/widgets/anime_header.dart';
 
 class AnimeScreen extends StatelessWidget {
   const AnimeScreen({super.key});
@@ -16,94 +15,73 @@ class AnimeScreen extends StatelessWidget {
     return FutureBuilder<List<List<Anime>>>(
       future: Future.wait([
         apiAsyncLoadListAnimes(),
+        apiAsyncLoadTopAnimes(),
       ]),
       builder: (
         BuildContext context,
         AsyncSnapshot<List<List<Anime>>> snapshot,
       ) {
+        if (snapshot.hasError) {
+          return ErrorWidget(snapshot.error.toString());
+        }
         if (!snapshot.hasData) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         }
+        final List<Anime> listRecent = snapshot.data![0];
+        final List<Anime> listTop = snapshot.data![1];
+        
         return Provider.value(
-          value: snapshot.data![0],
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: 110,
-                      height: 50,
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage("assets/animeAppLogoFull.png"),
-                          fit: BoxFit.contain,
+          value: listRecent,
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 110,
+                        height: 50,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/animeAppLogoFull.png"),
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       ),
+                      const SearchBarWidget(),
+                    ],
+                  ),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: CarouselTopAnimes(listTop: listTop),
+              ),
+              const SliverToBoxAdapter(child: Divider()),
+              const SliverToBoxAdapter(
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "Latest episodes",
+                      style: TextStyle(fontWeight: FontWeight.w500),
                     ),
-                    const SearchBarWidget(),
+                    Text(
+                      "Most popular",
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    Text(
+                      "By genre",
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
                   ],
                 ),
               ),
-              ImageSlideshow(
-                indicatorColor: Colors.blue,
-                onPageChanged: (value) {
-                  debugPrint('Page changed: $value');
-                },
-                autoPlayInterval: 3000,
-                isLoop: true,
-                children: [
-                  AnimeHeader(
-                    anime: snapshot.data![0][0],
-                  ),
-                  AnimeHeader(
-                    anime: snapshot.data![0][1],
-                  ),
-                  AnimeHeader(
-                    anime: snapshot.data![0][2],
-                  ),
-                  AnimeHeader(
-                    anime: snapshot.data![0][3],
-                  ),
-                  AnimeHeader(
-                    anime: snapshot.data![0][4],
-                  ),
-                  AnimeHeader(
-                    anime: snapshot.data![0][5],
-                  ),
-                ],
-              ),
-              const Divider(),
-              const Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    "Latest episodes",
-                    style: TextStyle(fontWeight: FontWeight.w500),
-                  ),
-                  Text(
-                    "Most popular",
-                    style: TextStyle(fontWeight: FontWeight.w500),
-                  ),
-                  Text(
-                    "By genre",
-                    style: TextStyle(fontWeight: FontWeight.w500),
-                  ),
-                ],
-              ),
-              Expanded(
-                child: LayoutBuilder(
-                  builder: (BuildContext context, BoxConstraints constraints) {
-                    return AnimeGrid(
-                        count: (constraints.maxWidth / (225 + 20)).round());
-                  },
-                ),
-              ),
+              const AnimeGrid(),
             ],
           ),
         );

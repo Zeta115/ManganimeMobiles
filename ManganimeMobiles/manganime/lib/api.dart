@@ -24,7 +24,7 @@ Future<List<Anime>> apiAsyncLoadListAnimes() async {
 }
 
 Future<List<Anime>> apiAsyncLoadTopAnimes() async {
-  final url = Uri.parse("https://api.jikan.moe/v4/recommendations/anime");
+  final url = Uri.parse("https://api.jikan.moe/v4/top/anime");
   final futureResponse = await http.get(url);
 
   final json = jsonDecode(futureResponse.body);

@@ -22,24 +22,24 @@ class _AnimeListItemState extends State<AnimeListItem> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.max,
       children: [
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              Navigator.of(context).pushNamed(
-                "/episode",
-                arguments: widget.anime,
-              );
-              debugPrint(widget.anime.title);
-            });
-          },
-          child: Container(
-            height: 150,
-            width: 450,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(5)),
-              image: DecorationImage(
-                image: NetworkImage(widget.anime.image),
-                fit: BoxFit.cover,
+        Expanded(
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                Navigator.of(context).pushNamed(
+                  "/episode",
+                  arguments: widget.anime,
+                );
+                debugPrint(widget.anime.title);
+              });
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(5)),
+                image: DecorationImage(
+                  image: NetworkImage(widget.anime.image),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
@@ -69,17 +69,18 @@ class _AnimeGridState extends State<AnimeGrid> {
   @override
   Widget build(BuildContext context) {
     final List<Anime> animeList = context.read<List<Anime>>();
-    return GridView.count(
-      primary: false,
-      padding: const EdgeInsets.all(20),
-      crossAxisSpacing: 10,
-      mainAxisSpacing: widget.count * 3,
-      childAspectRatio: 1,
-      crossAxisCount: widget.count,
-      children: [
-        for (int i = 0; i < animeList.length; i++)
-          AnimeListItem(anime: animeList[i]),
-      ],
+    return SliverGrid(
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 225,
+        crossAxisSpacing: 20.0,
+        childAspectRatio: 1,
+      ),
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          return AnimeListItem(anime: animeList[index]);
+        },
+        childCount: animeList.length,
+      ),
     );
   }
 }

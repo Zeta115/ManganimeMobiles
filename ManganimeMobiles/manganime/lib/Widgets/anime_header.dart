@@ -79,3 +79,44 @@ class _AnimeHeaderState extends State<AnimeHeader> {
     );
   }
 }
+
+class CarouselTopAnimes extends StatelessWidget {
+  const CarouselTopAnimes({
+    super.key,
+    required this.listTop,
+  });
+
+  final List<Anime> listTop;
+
+  @override
+  Widget build(BuildContext context) {
+    return ImageSlideshow(
+      indicatorColor: Colors.blue,
+      onPageChanged: (value) {
+        debugPrint('Page changed: $value');
+      },
+      autoPlayInterval: 3000,
+      isLoop: true,
+      children: [
+        AnimeHeader(
+          anime: listTop[0],
+        ),
+        AnimeHeader(
+          anime: listTop[1],
+        ),
+        AnimeHeader(
+          anime: listTop[2],
+        ),
+        AnimeHeader(
+          anime: listTop[3],
+        ),
+        AnimeHeader(
+          anime: listTop[4],
+        ),
+        AnimeHeader(
+          anime: listTop[5],
+        ),
+      ],
+    );
+  }
+}

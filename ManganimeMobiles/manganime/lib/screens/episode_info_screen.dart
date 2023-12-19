@@ -14,12 +14,14 @@ class _EpisodeInfoScreenState extends State<EpisodeInfoScreen> {
     final Anime anime = ModalRoute.of(context)!.settings.arguments as Anime;
     final screenSize = MediaQuery.of(context).size;
 
+
+  final Map<String, dynamic> info = {"State: ": anime.status, };
     return Scaffold(
       appBar: AppBar(
         title: Text(anime.title),
         actions: <Widget>[
           Padding(
-            padding: EdgeInsets.only(right: 20.0),
+            padding: const EdgeInsets.only(right: 20.0),
             child: GestureDetector(
               onTap: () {
                 setState(() {
@@ -53,16 +55,27 @@ class _EpisodeInfoScreenState extends State<EpisodeInfoScreen> {
                   child: Column(
                     children: [
                       Text("Synopsis: ${anime.synopsis}",
-                          style: TextStyle(fontSize: 14)),
-                      SizedBox(
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 5,
+                          style: const TextStyle(fontSize: 14)),
+                      const SizedBox(
                         height: 20,
                       ),
-                      Row(
+                      const Row(
                         children: [
-                          Icon(Icons.stream_rounded),
-                          Text("data"),
-                          Icon(Icons.all_out),
-                          Text("data"),
+                          Column(
+                            children: [
+                              InfoVars(),
+                              Icon(Icons.stream_rounded),
+                              Text(" Author"),
+                              Icon(Icons.stream_rounded),
+                              Text(" Episodes"),
+                              Icon(Icons.stream_rounded),
+                              Text(" Release Data"),
+                              Icon(Icons.stream_rounded),
+                              Text(" Popularity"),
+                            ],
+                          ),
                         ],
                       ),
                     ],
@@ -73,6 +86,22 @@ class _EpisodeInfoScreenState extends State<EpisodeInfoScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class InfoVars extends StatelessWidget {
+  const InfoVars({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(Icons.stream_rounded),
+        Text(" State"),
+      ],
     );
   }
 }
