@@ -31,52 +31,53 @@ class AnimeScreen extends StatelessWidget {
         }
         final List<Anime> listRecent = snapshot.data![0];
         final List<Anime> listTop = snapshot.data![1];
-        
+
         return Provider.value(
           value: listRecent,
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 110,
-                        height: 50,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("assets/animeAppLogoFull.png"),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      const SearchBarWidget(),
-                    ],
-                  ),
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: CarouselTopAnimes(listTop: listTop),
-              ),
-              const SliverToBoxAdapter(child: Divider()),
-              const SliverToBoxAdapter(
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                child: Column(
                   children: [
-                    Text(
-                      "Latest episodes",
-                      style: TextStyle(fontWeight: FontWeight.w500),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 110,
+                            height: 50,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image:
+                                    AssetImage("assets/animeAppLogoFull.png"),
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
+                          const SearchBarWidget(),
+                        ],
+                      ),
                     ),
-                    Text(
-                      "Most popular",
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                    Text(
-                      "By genre",
-                      style: TextStyle(fontWeight: FontWeight.w500),
+                    CarouselTopAnimes(listTop: listTop),
+                    const Divider(),
+                    const Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "Latest episodes",
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          "Most popular",
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          "By genre",
+                          style: TextStyle(fontWeight: FontWeight.w500),
+                        ),
+                      ],
                     ),
                   ],
                 ),
