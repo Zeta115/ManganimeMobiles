@@ -7,6 +7,8 @@ import 'package:manganime/models/anime.dart';
 import 'package:manganime/widgets/anime_list.dart';
 import 'package:manganime/widgets/anime_header.dart';
 
+//import 'package:wp_pivot_flutter/wp_pivot_flutter.dart';
+
 class AnimeScreen extends StatelessWidget {
   const AnimeScreen({super.key});
 

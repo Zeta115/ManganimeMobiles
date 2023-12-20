@@ -38,8 +38,6 @@ Future<List<Anime>> apiAsyncLoadTopAnimes() async {
     animeTop.add(anime);
   }
 
-  debugPrint("animeTop.length.toString()");
-  debugPrint(animeTop.length.toString());
   debugPrint(animeTop.toString());
   return animeTop;
 }
