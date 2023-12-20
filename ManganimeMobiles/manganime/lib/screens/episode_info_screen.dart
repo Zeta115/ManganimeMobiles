@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:manganime/models/anime.dart';
 import 'package:manganime/widgets/video_play.dart';
 
+//https://steemit.com/utopian-io/@tensor/playing-local-network-and-youtube-videos-with-the-video-player-plugin-in-dart-s-flutter-framework
 
 //https://pub.dev/packages/video_player
 //https://copyprogramming.com/howto/how-to-check-if-flutter-text-widget-was-overflowed?utm_content=cmp-true
