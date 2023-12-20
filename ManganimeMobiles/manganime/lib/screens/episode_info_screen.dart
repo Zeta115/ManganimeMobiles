@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:manganime/models/anime.dart';
-import 'package:video_player/video_player.dart';
+import 'package:manganime/widgets/video_play.dart';
+
 
 //https://pub.dev/packages/video_player
 //https://copyprogramming.com/howto/how-to-check-if-flutter-text-widget-was-overflowed?utm_content=cmp-true
@@ -30,26 +32,6 @@ class _EpisodeInfoScreenState extends State<EpisodeInfoScreen> {
       "Release Date:": anime.date,
     };
 
-    late VideoPlayerController _controller;
-    late Future<void> _initializeVideoPlayerFuture;
-
-    @override
-    void initState() {
-      super.initState();
-      _controller = VideoPlayerController.networkUrl(Uri.parse(
-          'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'))
-        ..initialize().then((_) {
-          // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-          setState(() {});
-        });
-    }
-
-    @override
-    void dispose() {
-      super.dispose();
-      _controller.dispose();
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Text(anime.title),
@@ -78,12 +60,12 @@ class _EpisodeInfoScreenState extends State<EpisodeInfoScreen> {
           children: [
             Column(
               children: [
-                Container(
-                  width: screenSize.width,
-                  height: 200,
-                  color: Colors.amber,
-                  // TODO: video player
-                ),
+                const SizedBox(
+                    width: 720,
+                    height: 360,
+                    child: PlayVideo(/*url: anime.trailer*/),
+                    ),
+                //PlayVideo(url: anime.trailer),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
