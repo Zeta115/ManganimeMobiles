@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:manganime/models/anime.dart';
 import 'package:manganime/models/manga.dart';
 
+// ---Anime---
 Future<List<Anime>> apiAsyncLoadListAnimes() async {
   final url = Uri.parse("https://api.jikan.moe/v4/seasons/now");
   final futureResponse = await http.get(url);
@@ -42,6 +43,7 @@ Future<List<Anime>> apiAsyncLoadTopAnimes() async {
   return animeTop;
 }
 
+// Manga
 Future<List<Manga>> apiAsyncLoadListMangas() async {
   final List<Manga> mangaList = [];
 

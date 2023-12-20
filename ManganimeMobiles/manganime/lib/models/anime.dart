@@ -23,7 +23,7 @@ class Anime {
         type = json["type"],
         source = json["source"],
         studio = json["studios"][0]["name"],
-        date = json["aired"]["from"],
+        date = json["aired"]["from"].substring(0, json["aired"]["from"].indexOf('T')),
         rating = json["rating"],
         synopsis = json["synopsis"] ??
             "No synopsis information has been added to this title.",

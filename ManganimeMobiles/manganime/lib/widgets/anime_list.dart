@@ -20,7 +20,6 @@ class _AnimeListItemState extends State<AnimeListItem> {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisSize: MainAxisSize.max,
       children: [
         Expanded(
           child: GestureDetector(
@@ -33,12 +32,15 @@ class _AnimeListItemState extends State<AnimeListItem> {
                 debugPrint(widget.anime.title);
               });
             },
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(5)),
-                image: DecorationImage(
-                  image: NetworkImage(widget.anime.image),
-                  fit: BoxFit.cover,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(5)),
+                  image: DecorationImage(
+                    image: NetworkImage(widget.anime.image),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -72,7 +74,6 @@ class _AnimeGridState extends State<AnimeGrid> {
     return SliverGrid(
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 225,
-        crossAxisSpacing: 20.0,
         childAspectRatio: 1,
       ),
       delegate: SliverChildBuilderDelegate(
