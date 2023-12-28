@@ -5,25 +5,32 @@ import 'package:manganime/screens/anime_screen.dart';
 import 'package:manganime/screens/manga_screen.dart';
 import 'package:manganime/screens/characters_screen.dart';
 import 'package:manganime/screens/user_screen.dart';
-
 import 'package:manganime/widgets/nav_bar.dart';
+import 'package:manganime/models/user.dart';
 
 class MainScreens extends StatefulWidget {
-  const MainScreens({super.key});
+  final User user;
+
+  const MainScreens({Key? key, required this.user}) : super(key: key);
 
   @override
   State<MainScreens> createState() => _MainScreensState();
 }
 
 class _MainScreensState extends State<MainScreens> {
+  late Set<Widget> screens_;
   int currentScreen = 0;
 
-  Set<Widget> screens_ = {
-    const AnimeScreen(),
-    const MangaScreen(),
-    const CharacterScreen(),
-    const UserScreen()
-  };
+  @override
+  void initState() {
+    super.initState();
+    screens_ = {
+      const AnimeScreen(),
+      const MangaScreen(),
+      const CharacterScreen(),
+      UserScreen(user: widget.user),
+    };
+  }
 
   void setSelectedScreen(i) {
     setState(() {
@@ -47,7 +54,7 @@ class _MainScreensState extends State<MainScreens> {
             navBarItem("Anime", Icons.live_tv_rounded),
             navBarItem("Manga", Icons.shelves),
             navBarItem("Characters", Icons.list),
-            navBarItem("User", Icons.person)
+            navBarItem("User", Icons.person),
           ],
           onTap: setSelectedScreen,
         ),
