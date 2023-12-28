@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:manganime/models/anime.dart';
 import 'package:manganime/models/manga.dart';
+import 'package:manganime/models/user.dart';
 
 // ---Anime---
 Future<List<Anime>> apiAsyncLoadListAnimes() async {
@@ -65,4 +66,23 @@ Future<List<Manga>> apiAsyncLoadListMangas() async {
   }
 
   return mangaList;
+}
+
+Future<List<User>> apiAsyncLoadUser() async {
+  final List<User> userList = [];
+
+  final url = Uri.parse("https://api.jikan.moe/v4/characters/5/full");
+  final futureResponse = await http.get(url);
+
+  final json = jsonDecode(futureResponse.body);
+  final jsonUser = json["data"];
+
+  final user = jsonUser != null ? User.fromJson(jsonUser) : null;
+
+  if (user != null) {
+    userList.add(user);
+    debugPrint(userList.toString());
+  }
+
+  return userList;
 }
