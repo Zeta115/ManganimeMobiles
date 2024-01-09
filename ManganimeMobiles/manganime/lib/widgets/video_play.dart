@@ -51,7 +51,7 @@ class _PlayVideoState extends State<PlayVideo> {
           }
         },
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(elevation: 6,
         onPressed: () {
           setState(() {
             // If the video is playing, pause it.

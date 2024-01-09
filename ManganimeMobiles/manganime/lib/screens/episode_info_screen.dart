@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:manganime/models/anime.dart';
 import 'package:manganime/widgets/video_play.dart';
+import 'package:manganime/widgets/video_player.dart';
 
 //https://steemit.com/utopian-io/@tensor/playing-local-network-and-youtube-videos-with-the-video-player-plugin-in-dart-s-flutter-framework
 
@@ -57,67 +58,64 @@ class _EpisodeInfoScreenState extends State<EpisodeInfoScreen> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Stack(
+        child: Column(
           children: [
-            Column(
-              children: [
-                const SizedBox(
-                    width: 720,
-                    height: 360,
-                    child: PlayVideo(/*url: anime.trailer*/),
-                    ),
-                //PlayVideo(url: anime.trailer),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                  child: Column(
+            SizedBox(
+                width: 720,
+                height: 360,
+                child: VideoPlay(ytId: anime.trailer) //PlayVideo(/*url: anime.trailer*/),
+                ),
+
+            //PlayVideo(url: anime.trailer),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5.0),
+                    child: Text("Synopsis: ",
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w700)),
+                  ),
+                  Text(anime.synopsis,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 5,
+                      style: const TextStyle(fontSize: 14)),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 5.0),
-                        child: Text("Synopsis: ",
-                            style: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.w700)),
-                      ),
-                      Text(anime.synopsis,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 5,
-                          style: const TextStyle(fontSize: 14)),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              for (int i = 0; i < info.length / 2; ++i)
-                                InfoVars(
-                                  map: info,
-                                  index: i,
-                                ),
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              for (int i = (info.length / 2).round();
-                                  i < info.length;
-                                  ++i)
-                                InfoVars(
-                                  map: info,
-                                  index: i,
-                                ),
-                            ],
-                          ),
+                          for (int i = 0; i < info.length / 2; ++i)
+                            InfoVars(
+                              map: info,
+                              index: i,
+                            ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          for (int i = (info.length / 2).round();
+                              i < info.length;
+                              ++i)
+                            InfoVars(
+                              map: info,
+                              index: i,
+                            ),
                         ],
                       ),
                     ],
                   ),
-                ),
-              ],
-            )
+                ],
+              ),
+            ),
           ],
         ),
       ),

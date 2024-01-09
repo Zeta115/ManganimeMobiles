@@ -22,21 +22,21 @@ class Anime {
         image = json["images"]["jpg"]["image_url"],
         type = json["type"],
         source = json["source"],
-        studio = json["studios"][0]["name"],
+        studio = json["studios"].length > 0 ? json["studios"][0]["name"] : "<unknown>",
         date = json["aired"]["from"].substring(0, json["aired"]["from"].indexOf('T')),
-        rating = json["rating"],
+        rating = json["rating"] ?? "RG - 13",
         synopsis = json["synopsis"] ??
             "No synopsis information has been added to this title.",
         genres = (json["genres"] as List)
             .map((e) => e["name"])  // 
             .cast<String>()
             .toList(),
-        episodes = json["episodes"],
-        trailer = json["trailer"]["url"] ?? "-",
+        episodes = json["episodes"] ?? 0,
+        trailer = json["trailer"]["youtube_id"] ?? "-",
         status = json["status"],
-        popularity = json["popularity"],
+        popularity = json["popularity"] ?? 0,
         score = json["score"] ?? 0,
-        scoredBy = json["scored_by"] ?? 0,
+        scoredBy = json["scored_by"] != null ? (json["scored_by"] as int).toDouble() : 0,
         favourite = false;
 }
 
