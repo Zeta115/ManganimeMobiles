@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:manganime/models/anime.dart';
-import 'package:manganime/widgets/anime_info.dart';
 
 class CollapsingHeader extends StatefulWidget {
-  const CollapsingHeader(
-      {super.key, required this.header, required this.anime});
+  CollapsingHeader(
+      {super.key, required this.header, required this.wid, this.subTrailing});
 
   final String header;
-  final Anime anime;
+  final Widget wid;
+  List<IconData>? subTrailing;
 
   @override
   State<CollapsingHeader> createState() => _CollapsingHeaderState();
@@ -21,14 +20,26 @@ class _CollapsingHeaderState extends State<CollapsingHeader> {
     return Column(
       children: [
         ListTile(
-          leading: Icon(open ? Icons.keyboard_arrow_down_rounded : Icons.keyboard_arrow_right_rounded),
-          title: Text(widget.header, style: const TextStyle(fontWeight: FontWeight.w700),),
+          leading: Icon(open
+              ? Icons.keyboard_arrow_down_rounded
+              : Icons.keyboard_arrow_right_rounded),
+          title: Text(
+            widget.header,
+            style: const TextStyle(fontWeight: FontWeight.w700),
+          ),
+          trailing: widget.subTrailing == null
+              ? null
+              : Row(
+                  children: [
+                    for (int i = 0; i < widget.subTrailing!.length; ++i)
+                      Icon(widget.subTrailing?[i]),
+                  ],
+                ),
           onTap: () => setState(() {
             open = !open;
           }),
         ),
-
-        (open) ? Information(anime: widget.anime) : const SizedBox(),
+        (open) ? widget.wid : const SizedBox(),
       ],
     );
   }

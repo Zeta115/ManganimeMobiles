@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:manganime/custom_icons/search_icon.dart';
 
 import 'package:manganime/models/anime.dart';
+import 'package:manganime/widgets/anime_info.dart';
 import 'package:manganime/widgets/collapsing_header.dart';
+import 'package:manganime/widgets/episode_list.dart';
 import 'package:manganime/widgets/video_play.dart';
 import 'package:manganime/widgets/video_player.dart';
 
@@ -120,8 +123,13 @@ class _EpisodeInfoScreenState extends State<EpisodeInfoScreen> {
                   sizedBox,
                   CollapsingHeader(
                     header: "Information",
-                    anime: anime,
+                    wid: Information(anime: anime),
                   ),
+                  /*CollapsingHeader(
+                    header: "Episodes",
+                    wid: const EpisodeList(),
+                    //subTrailing: const [Icons.sort_rounded, CustomIcons.search,]
+                  ),*/
                 ],
               ),
             ),

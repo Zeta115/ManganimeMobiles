@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:manganime/models/anime.dart';
 
 class Information extends StatelessWidget {
-  const Information({
-    super.key, required this.anime
-  });
+  const Information({super.key, required this.anime});
 
   final Anime anime;
 
@@ -20,29 +18,34 @@ class Information extends StatelessWidget {
       "Studio:": anime.studio,
       "Release Date:": anime.date,
     };
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
       children: [
-        Column(
+        Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            for (int i = 0; i < info.length / 2; ++i)
-              InfoVars(
-                map: info,
-                index: i,
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                for (int i = 0; i < info.length / 2; ++i)
+                  InfoVars(
+                    map: info,
+                    index: i,
+                  ),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                for (int i = (info.length / 2).round(); i < info.length; ++i)
+                  InfoVars(
+                    map: info,
+                    index: i,
+                  ),
+              ],
+            ),
           ],
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            for (int i = (info.length / 2).round(); i < info.length; ++i)
-              InfoVars(
-                map: info,
-                index: i,
-              ),
-          ],
-        ),
+        for (int i = 0; i < info.length / 2; ++i) Text("data"),
       ],
     );
   }
