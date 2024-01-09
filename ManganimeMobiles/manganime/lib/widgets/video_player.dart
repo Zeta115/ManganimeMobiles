@@ -81,17 +81,10 @@ class _VideoPlayState extends State<VideoPlay> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  
-                  // TODO: Spacer,
                   _text('Title', _videoMetaData.title),
-                  
-                  // TODO: Spacer,
                   _text('Channel', _videoMetaData.author),
-                  
-                  // TODO: Spacer,
                   _text('Video Id', _videoMetaData.videoId),
-                  
-                  // TODO: Spacer,
+
                   Row(
                     children: [
                       _text(
@@ -106,7 +99,6 @@ class _VideoPlayState extends State<VideoPlay> {
                     ],
                   ),
 
-                  // TODO: Spacer,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -156,7 +148,6 @@ class _VideoPlayState extends State<VideoPlay> {
                       ),
                     ],
                   ),
-                  // TODO: Spacer
                   Row(
                     children: <Widget>[
                       const Text(

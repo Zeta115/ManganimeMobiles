@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:manganime/models/anime.dart';
+import 'package:manganime/widgets/collapsing_header.dart';
 import 'package:manganime/widgets/video_play.dart';
 import 'package:manganime/widgets/video_player.dart';
 
@@ -23,16 +24,9 @@ class _EpisodeInfoScreenState extends State<EpisodeInfoScreen> {
     final Anime anime = ModalRoute.of(context)!.settings.arguments as Anime;
     final screenSize = MediaQuery.of(context).size;
 
-    final Map<String, dynamic> info = {
-      "State:": anime.status,
-      "Episodes:": anime.episodes,
-      "Source:": anime.source,
-      "Popularity:": "#${anime.popularity}",
-      //
-      "Type:": anime.type,
-      "Studio:": anime.studio,
-      "Release Date:": anime.date,
-    };
+    const sizedBox = SizedBox(
+      height: 10,
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -60,99 +54,79 @@ class _EpisodeInfoScreenState extends State<EpisodeInfoScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-                width: 720,
-                height: 360,
-                child: VideoPlay(ytId: anime.trailer) //PlayVideo(/*url: anime.trailer*/),
+            Stack(
+              alignment: Alignment.bottomLeft,
+              children: [
+                Column(
+                  children: [
+                    SizedBox(
+                        width: screenSize.width,
+                        height: 300 * screenSize.aspectRatio,
+                        child: VideoPlay(
+                            ytId: anime
+                                .trailer) //PlayVideo(/*url: anime.trailer*/),
+                        ),
+                    SizedBox(
+                      width: screenSize.width,
+                      height: 120 * screenSize.aspectRatio,
+                    ),
+                  ],
                 ),
-
-            //PlayVideo(url: anime.trailer),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: 200,
+                      height: 100 * screenSize.aspectRatio,
+                      color: Colors.amber,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5)),
+                        image: DecorationImage(
+                          image: NetworkImage(anime.image),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: screenSize.width * 0.45,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 5.0),
+                            child: Text("Synopsis: ",
+                                style: TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.w700)),
+                          ),
+                          Text(anime.synopsis,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 5,
+                              style: const TextStyle(fontSize: 14)),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5.0),
-                    child: Text("Synopsis: ",
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w700)),
-                  ),
-                  Text(anime.synopsis,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 5,
-                      style: const TextStyle(fontSize: 14)),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          for (int i = 0; i < info.length / 2; ++i)
-                            InfoVars(
-                              map: info,
-                              index: i,
-                            ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          for (int i = (info.length / 2).round();
-                              i < info.length;
-                              ++i)
-                            InfoVars(
-                              map: info,
-                              index: i,
-                            ),
-                        ],
-                      ),
-                    ],
+                  sizedBox,
+                  CollapsingHeader(
+                    header: "Information",
+                    anime: anime,
                   ),
                 ],
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class InfoVars extends StatelessWidget {
-  const InfoVars({
-    super.key,
-    required this.map,
-    required this.index,
-  });
-
-  final Map<String, dynamic> map;
-  final int index;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 3.0),
-      child: Row(
-        children: [
-          const Icon(
-            Icons.stream_rounded,
-            size: 15,
-            color: Colors.cyan,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Text(map.keys.elementAt(index),
-                style:
-                    const TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
-          ),
-          Text(map.values.elementAt(index).toString(),
-              style: const TextStyle(fontSize: 14))
-        ],
       ),
     );
   }
