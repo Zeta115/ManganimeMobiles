@@ -22,25 +22,9 @@ class _MangaListItemState extends State<MangaListItem> {
     return ListView(
       shrinkWrap: true,
       children: [
-        IconButton(
-          icon: Icon(
-            Icons.favorite_outline,
-            color: iconColor,
-            size: 36.0,
-          ),
-          onPressed: () {
-            setState(() {
-              iconColor = iconColor == Colors.grey ? Colors.red : Colors.grey;
-              widget.manga.favourite = true;
-            });
-          },
-        ),
-        const SizedBox(
-          height: 10,
-        ),
         Container(
-          height: 150,
-          width: 650,
+          height: 350,
+          width: 450,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(5)),
             image: DecorationImage(

@@ -5,10 +5,10 @@ import 'package:manganime/models/User.dart';
 class UserListItem extends StatefulWidget {
   const UserListItem({
     Key? key,
-    required this.user,
+    required this.defineduser,
   }) : super(key: key);
 
-  final User user;
+  final User defineduser;
 
   @override
   State<UserListItem> createState() => _UserListItemState();
@@ -24,7 +24,7 @@ class _UserListItemState extends State<UserListItem> {
             children: [
               Align(
                 alignment: Alignment.topCenter,
-                child: Text(widget.user.name,
+                child: Text(widget.defineduser.name,
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.bold)),
               ),
@@ -34,7 +34,7 @@ class _UserListItemState extends State<UserListItem> {
               ),
               Align(
                 alignment: Alignment.topCenter,
-                child: Text(widget.user.name_kanji,
+                child: Text(widget.defineduser.name_kanji,
                     style: const TextStyle(fontSize: 20)),
               ),
             ],
@@ -48,7 +48,7 @@ class _UserListItemState extends State<UserListItem> {
                 shape: BoxShape.circle,
                 color: Colors.black26,
                 image: DecorationImage(
-                  image: NetworkImage(widget.user.image),
+                  image: NetworkImage(widget.defineduser.image),
                   fit: BoxFit.fitWidth,
                 ),
               ),
@@ -57,7 +57,7 @@ class _UserListItemState extends State<UserListItem> {
           Align(
             alignment: Alignment.topRight,
             child: Text(
-              widget.user.about,
+              widget.defineduser.about,
               style: const TextStyle(fontSize: 10),
               textAlign: TextAlign.center,
             ),
