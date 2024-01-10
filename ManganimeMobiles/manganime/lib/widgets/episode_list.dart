@@ -7,14 +7,17 @@ class EpisodeList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Anime anime = ModalRoute.of(context)!.settings.arguments as Anime;
-
-    return SingleChildScrollView(
-      child: Column(children: [
-        for (int i = anime.episodes; i > 0; ++i)
-          Episode(
-            i: i,
-          ),
-      ]),
+    debugPrint(anime.episodes.toString());
+    return SizedBox(
+      height: 300,
+      child: SingleChildScrollView(
+        child: Column(children: [
+          for (int i = anime.episodes; i > 0; --i)
+            Episode(
+              i: i,
+            ),
+        ]),
+      ),
     );
   }
 }
@@ -33,7 +36,9 @@ class _EpisodeState extends State<Episode> {
     final Anime anime = ModalRoute.of(context)!.settings.arguments as Anime;
 
     return ListTile(
-      trailing: Container(
+      leading: Container(
+        width: 60,
+        height: 60,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(5)),
             image: DecorationImage(

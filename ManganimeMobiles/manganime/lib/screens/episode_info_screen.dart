@@ -8,12 +8,6 @@ import 'package:manganime/widgets/episode_list.dart';
 import 'package:manganime/widgets/video_play.dart';
 import 'package:manganime/widgets/video_player.dart';
 
-//https://steemit.com/utopian-io/@tensor/playing-local-network-and-youtube-videos-with-the-video-player-plugin-in-dart-s-flutter-framework
-
-//https://pub.dev/packages/video_player
-//https://copyprogramming.com/howto/how-to-check-if-flutter-text-widget-was-overflowed?utm_content=cmp-true
-//https://medium.com/flutterworld/flutter-tabbar-and-tricks-4f36e06025a4
-
 class EpisodeInfoScreen extends StatefulWidget {
   const EpisodeInfoScreen({super.key});
 
@@ -57,66 +51,53 @@ class _EpisodeInfoScreenState extends State<EpisodeInfoScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Stack(
-              alignment: Alignment.bottomLeft,
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: SizedBox(
+                  width: screenSize.width,
+                  height: 300 * screenSize.aspectRatio,
+                  child: VideoPlay(
+                      ytId:
+                          anime.trailer) //PlayVideo(/*url: anime.trailer*/),
+                  ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Column(
-                  children: [
-                    SizedBox(
-                        width: screenSize.width,
-                        height: 300 * screenSize.aspectRatio,
-                        child: VideoPlay(
-                            ytId: anime
-                                .trailer) //PlayVideo(/*url: anime.trailer*/),
-                        ),
-                    SizedBox(
-                      width: screenSize.width,
-                      height: 120 * screenSize.aspectRatio,
+                Container(
+                  width: 175,
+                  height: 250,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(5)),
+                    image: DecorationImage(
+                      image: NetworkImage(anime.image),
+                      fit: BoxFit.fitHeight,
                     ),
-                  ],
+                  ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      width: 200,
-                      height: 100 * screenSize.aspectRatio,
-                      color: Colors.amber,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(5)),
-                        image: DecorationImage(
-                          image: NetworkImage(anime.image),
-                          fit: BoxFit.cover,
-                        ),
+                SizedBox(
+                  width: screenSize.width * 0.45,
+                  height: 250,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 5.0),
+                        child: Text("Synopsis: ",
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w700)),
                       ),
-                    ),
-                    SizedBox(
-                      width: screenSize.width * 0.45,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 5.0),
-                            child: Text("Synopsis: ",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w700)),
-                          ),
-                          Text(anime.synopsis,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 5,
-                              style: const TextStyle(fontSize: 14)),
-                        ],
-                      ),
-                    ),
-                  ],
+                      Text(anime.synopsis,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: (250 / 20).round(),
+                          style: const TextStyle(fontSize: 14)),
+                    ],
+                  ),
                 ),
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -125,11 +106,12 @@ class _EpisodeInfoScreenState extends State<EpisodeInfoScreen> {
                     header: "Information",
                     wid: Information(anime: anime),
                   ),
-                  /*CollapsingHeader(
+                  const Divider(thickness: 2),
+                  const CollapsingHeader(
                     header: "Episodes",
-                    wid: const EpisodeList(),
+                    wid: EpisodeList(),
                     //subTrailing: const [Icons.sort_rounded, CustomIcons.search,]
-                  ),*/
+                  ),
                 ],
               ),
             ),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CollapsingHeader extends StatefulWidget {
-  CollapsingHeader(
+  const CollapsingHeader(
       {super.key, required this.header, required this.wid, this.subTrailing});
 
   final String header;
   final Widget wid;
-  List<IconData>? subTrailing;
+  final List<IconData>? subTrailing;
 
   @override
   State<CollapsingHeader> createState() => _CollapsingHeaderState();
@@ -32,7 +32,7 @@ class _CollapsingHeaderState extends State<CollapsingHeader> {
               : Row(
                   children: [
                     for (int i = 0; i < widget.subTrailing!.length; ++i)
-                      Icon(widget.subTrailing?[i]),
+                      Icon(widget.subTrailing?[i], size: i * 0.5),
                   ],
                 ),
           onTap: () => setState(() {

@@ -65,23 +65,26 @@ class AnimeScreen extends StatelessWidget {
                     ),
                     CarouselTopAnimes(listTop: listTop),
                     const Divider(),
-                    const Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          "Latest episodes",
-                          style: TextStyle(fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          "Most popular",
-                          style: TextStyle(fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          "By genre",
-                          style: TextStyle(fontWeight: FontWeight.w500),
-                        ),
-                      ],
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 10),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            "Latest episodes",
+                            style: TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                          Text(
+                            "Most popular",
+                            style: TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                          Text(
+                            "By genre",
+                            style: TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

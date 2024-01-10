@@ -27,6 +27,12 @@ class _VideoPlayState extends State<VideoPlay> {
       initialVideoId: widget.ytId,
       flags: const YoutubePlayerFlags(
         mute: false,
+        autoPlay: false,
+        disableDragSeek: false,
+        loop: false,
+        isLive: false,
+        forceHD: false,
+        enableCaption: true,
       ),
     );
     _idController = TextEditingController();
