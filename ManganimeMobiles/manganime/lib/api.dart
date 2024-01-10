@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:manganime/models/anime.dart';
 import 'package:manganime/models/manga.dart';
 import 'package:manganime/models/user.dart';
+import 'dart:math';
 
 // ---Anime---
 Future<List<Anime>> apiAsyncLoadListAnimes(String link) async {
@@ -26,14 +27,16 @@ Future<List<Anime>> apiAsyncLoadListAnimes(String link) async {
 }
 
 Future<List<List<Anime>>> apiAsyncLoadAllAnimes() async {
-  final animes1 = await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/seasons/now");
+  final animes1 =
+      await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/seasons/now");
   //await Future.delayed(Duration(seconds: 2)); // In case it has to wait for api purposes
-  final animes2 = await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/top/anime");
-  
-  final animes3 = await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/seasons/upcoming");
+  final animes2 =
+      await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/top/anime");
+
+  final animes3 =
+      await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/seasons/upcoming");
   return [animes1, animes2, animes3];
 }
-
 
 // Manga
 Future<List<Manga>> apiAsyncLoadListMangas() async {
@@ -62,7 +65,10 @@ Future<List<Manga>> apiAsyncLoadListMangas() async {
 Future<List<User>> apiAsyncLoadUser() async {
   final List<User> userList = [];
 
-  final url = Uri.parse("https://api.jikan.moe/v4/characters/5/full");
+  final randomuserint = Random().nextInt(5) + 1;
+  final url =
+      Uri.parse("https://api.jikan.moe/v4/characters/$randomuserint/full");
+
   final futureResponse = await http.get(url);
 
   final json = jsonDecode(futureResponse.body);

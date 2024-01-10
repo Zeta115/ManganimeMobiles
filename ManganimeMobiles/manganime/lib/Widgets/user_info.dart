@@ -15,8 +15,6 @@ class UserListItem extends StatefulWidget {
 }
 
 class _UserListItemState extends State<UserListItem> {
-  Color iconColor = Colors.grey;
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -29,6 +27,10 @@ class _UserListItemState extends State<UserListItem> {
                 child: Text(widget.user.name,
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.bold)),
+              ),
+              const Align(
+                alignment: Alignment.topCenter,
+                child: Text("/", style: TextStyle(fontSize: 30)),
               ),
               Align(
                 alignment: Alignment.topCenter,
