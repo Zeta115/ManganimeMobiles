@@ -17,10 +17,7 @@ class AnimeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<List<Anime>>>(
-      future: Future.wait([
-        apiAsyncLoadListAnimes(),
-        apiAsyncLoadTopAnimes(),
-      ]),
+      future: apiAsyncLoadAllAnimes(),
       builder: (
         BuildContext context,
         AsyncSnapshot<List<List<Anime>>> snapshot,
@@ -35,6 +32,8 @@ class AnimeScreen extends StatelessWidget {
         }
         final List<Anime> listRecent = snapshot.data![0];
         final List<Anime> listTop = snapshot.data![1];
+        //final List<Anime> listPopular = snapshot.data![1];
+        //final List<Anime> listByGenre = snapshot.data![1];
 
         return Provider.value(
           value: listRecent,
@@ -71,18 +70,12 @@ class AnimeScreen extends StatelessWidget {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text(
-                            "Latest episodes",
-                            style: TextStyle(fontWeight: FontWeight.w500),
-                          ),
-                          Text(
-                            "Most popular",
-                            style: TextStyle(fontWeight: FontWeight.w500),
-                          ),
-                          Text(
+                          Section(name: "Latest episodes"),
+                          Section(name: "Most popular"),
+                          /*Text(
                             "By genre",
                             style: TextStyle(fontWeight: FontWeight.w500),
-                          ),
+                          ),*/
                         ],
                       ),
                     ),
@@ -94,6 +87,27 @@ class AnimeScreen extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class Section extends StatelessWidget {
+  const Section({super.key, required this.name});
+
+  final String name;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 150,
+      child: Column(
+        children: [
+          Text(
+            name,
+            style: const TextStyle(fontWeight: FontWeight.w500),
+          ),
+          Divider(thickness: 5, )
+        ],
+      ),
     );
   }
 }

@@ -6,8 +6,8 @@ import 'package:manganime/models/manga.dart';
 import 'package:manganime/models/user.dart';
 
 // ---Anime---
-Future<List<Anime>> apiAsyncLoadListAnimes() async {
-  final url = Uri.parse("https://api.jikan.moe/v4/seasons/now");
+Future<List<Anime>> apiAsyncLoadListAnimes(String link) async {
+  final url = Uri.parse(link);
   final futureResponse = await http.get(url);
 
   final json = jsonDecode(futureResponse.body);
@@ -25,30 +25,11 @@ Future<List<Anime>> apiAsyncLoadListAnimes() async {
   return animeList;
 }
 
-Future<List<Anime>> apiAsyncLoadTopAnimes() async {
-  final url = Uri.parse("https://api.jikan.moe/v4/top/anime");
-  final futureResponse = await http.get(url);
-
-  final json = jsonDecode(futureResponse.body);
-
-  final jsonAnimeList = json["data"];
-
-  final List<Anime> animeTop = [];
-
-  for (final jsonAnime in jsonAnimeList) {
-    final anime = Anime.fromJson(jsonAnime);
-    animeTop.add(anime);
-  }
-
-  debugPrint(animeTop.toString());
-  return animeTop;
-}
-
 // Manga
 Future<List<Manga>> apiAsyncLoadListMangas() async {
   final List<Manga> mangaList = [];
 
-  for (int listado = 1; listado < 10; listado++) {
+  for (int listado = 1; listado < 2; listado++) {
     final url = Uri.parse("https://api.jikan.moe/v4/manga/$listado/full");
     final futureResponse = await http.get(url);
 
@@ -85,4 +66,11 @@ Future<List<User>> apiAsyncLoadUser() async {
   }
 
   return userList;
+}
+
+Future<List<List<Anime>>> apiAsyncLoadAllAnimes() async {
+  final animes1 = await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/seasons/now");
+  //await Future.delayed(Duration(seconds: 2)); // In case it has to wait for api purposes
+  final animes2 = await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/top/anime");
+  return [animes1, animes2];
 }
