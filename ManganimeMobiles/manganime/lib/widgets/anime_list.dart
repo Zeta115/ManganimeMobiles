@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import 'package:manganime/models/anime.dart';
 
 class AnimeListItem extends StatefulWidget {
@@ -60,8 +58,9 @@ class _AnimeListItemState extends State<AnimeListItem> {
 }
 
 class AnimeGrid extends StatefulWidget {
-  const AnimeGrid({this.count = 3, super.key});
-  final int count;
+  const AnimeGrid({super.key, required this.animeList});
+
+  final List<Anime> animeList;
 
   @override
   State<AnimeGrid> createState() => _AnimeGridState();
@@ -70,7 +69,6 @@ class AnimeGrid extends StatefulWidget {
 class _AnimeGridState extends State<AnimeGrid> {
   @override
   Widget build(BuildContext context) {
-    final List<Anime> animeList = context.read<List<Anime>>();
     return SliverGrid(
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 225,
@@ -78,9 +76,9 @@ class _AnimeGridState extends State<AnimeGrid> {
       ),
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
-          return AnimeListItem(anime: animeList[index]);
+          return AnimeListItem(anime: widget.animeList[index]);
         },
-        childCount: animeList.length,
+        childCount:  widget.animeList.length,
       ),
     );
   }

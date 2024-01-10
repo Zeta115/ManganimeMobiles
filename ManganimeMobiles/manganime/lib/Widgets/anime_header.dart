@@ -99,24 +99,10 @@ class CarouselTopAnimes extends StatelessWidget {
       autoPlayInterval: 3000,
       isLoop: true,
       children: [
-        AnimeHeader(
-          anime: listTop[0],
-        ),
-        AnimeHeader(
-          anime: listTop[1],
-        ),
-        AnimeHeader(
-          anime: listTop[2],
-        ),
-        AnimeHeader(
-          anime: listTop[3],
-        ),
-        AnimeHeader(
-          anime: listTop[4],
-        ),
-        AnimeHeader(
-          anime: listTop[5],
-        ),
+        for (int i = 0; i < 5; ++i)
+          AnimeHeader(
+            anime: listTop[i],
+          ),
       ],
     );
   }

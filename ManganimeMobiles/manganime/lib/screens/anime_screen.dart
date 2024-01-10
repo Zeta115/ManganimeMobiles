@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:manganime/Widgets/search_bar.dart';
-import 'package:provider/provider.dart';
 
 import 'package:manganime/api.dart';
 import 'package:manganime/models/anime.dart';
@@ -11,9 +10,14 @@ import 'package:manganime/widgets/anime_header.dart';
 //https://pub.dev/packages/flutter_image_slideshow/example
 //import 'package:wp_pivot_flutter/wp_pivot_flutter.dart';
 
-class AnimeScreen extends StatelessWidget {
+class AnimeScreen extends StatefulWidget {
   const AnimeScreen({super.key});
 
+  @override
+  State<AnimeScreen> createState() => _AnimeScreenState();
+}
+
+class _AnimeScreenState extends State<AnimeScreen> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<List<Anime>>>(
@@ -32,82 +36,75 @@ class AnimeScreen extends StatelessWidget {
         }
         final List<Anime> listRecent = snapshot.data![0];
         final List<Anime> listTop = snapshot.data![1];
-        //final List<Anime> listPopular = snapshot.data![1];
-        //final List<Anime> listByGenre = snapshot.data![1];
+        final List<Anime> listUpcoming = snapshot.data![2];
 
-        return Provider.value(
-          value: listRecent,
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 110,
-                            height: 50,
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                image:
-                                    AssetImage("assets/animeAppLogoFull.png"),
-                                fit: BoxFit.contain,
-                              ),
+        return CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: 110,
+                          height: 50,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage("assets/animeAppLogoFull.png"),
+                              fit: BoxFit.contain,
                             ),
                           ),
-                          const SearchBarWidget(),
-                        ],
-                      ),
+                        ),
+                        const SearchBarWidget(),
+                      ],
                     ),
-                    CarouselTopAnimes(listTop: listTop),
-                    const Divider(),
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 10),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  ),
+                  CarouselTopAnimes(listTop: listTop),
+                  const Divider(),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: DefaultTabController(
+                      length: 3,
+                      child: Column(
                         children: [
-                          Section(name: "Latest episodes"),
-                          Section(name: "Most popular"),
-                          /*Text(
-                            "By genre",
-                            style: TextStyle(fontWeight: FontWeight.w500),
-                          ),*/
+                          const SizedBox(
+                            width: 150,
+                            height: 25,
+                            child: TabBar(
+                              dividerColor: Colors.cyan,
+                              tabs: [
+                                Tab(text: "Latest episodes"),
+                                Tab(text: "Most Popular"),
+                                Tab(text: "Upcoming"),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: TabBarView(children: [
+                              AnimeGrid(
+                                animeList: listRecent,
+                              ),
+                              AnimeGrid(
+                                animeList: listTop,
+                              ),
+                              AnimeGrid(
+                                animeList: listUpcoming,
+                              ),
+                            ]),
+                          ),
                         ],
                       ),
                     ),
-                  ],
-                ),
+                  )
+                ],
               ),
-              const AnimeGrid(),
-            ],
-          ),
+            ),
+          ],
         );
       },
-    );
-  }
-}
-
-class Section extends StatelessWidget {
-  const Section({super.key, required this.name});
-
-  final String name;
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 150,
-      child: Column(
-        children: [
-          Text(
-            name,
-            style: const TextStyle(fontWeight: FontWeight.w500),
-          ),
-          Divider(thickness: 5, )
-        ],
-      ),
     );
   }
 }
