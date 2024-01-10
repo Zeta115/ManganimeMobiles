@@ -25,6 +25,16 @@ Future<List<Anime>> apiAsyncLoadListAnimes(String link) async {
   return animeList;
 }
 
+Future<List<List<Anime>>> apiAsyncLoadAllAnimes() async {
+  final animes1 = await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/seasons/now");
+  //await Future.delayed(Duration(seconds: 2)); // In case it has to wait for api purposes
+  final animes2 = await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/top/anime");
+  
+  final animes3 = await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/seasons/upcoming");
+  return [animes1, animes2, animes3];
+}
+
+
 // Manga
 Future<List<Manga>> apiAsyncLoadListMangas() async {
   final List<Manga> mangaList = [];
@@ -66,11 +76,4 @@ Future<List<User>> apiAsyncLoadUser() async {
   }
 
   return userList;
-}
-
-Future<List<List<Anime>>> apiAsyncLoadAllAnimes() async {
-  final animes1 = await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/seasons/now");
-  //await Future.delayed(Duration(seconds: 2)); // In case it has to wait for api purposes
-  final animes2 = await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/top/anime");
-  return [animes1, animes2];
 }

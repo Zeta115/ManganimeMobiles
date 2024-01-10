@@ -20,10 +20,10 @@ class Anime {
       : id = json["mal_id"],
         title = json["title"],
         image = json["images"]["jpg"]["image_url"],
-        type = json["type"],
+        type = json["type"] ?? "<unknown>",
         source = json["source"],
         studio = json["studios"].length > 0 ? json["studios"][0]["name"] : "<unknown>",
-        date = json["aired"]["from"].substring(0, json["aired"]["from"].indexOf('T')),
+        date = (json["aired"]["from"] != null) ? json["aired"]["from"].substring(0, json["aired"]["from"].indexOf('T')) : "<unknown>",
         rating = json["rating"] ?? "RG - 13",
         synopsis = json["synopsis"] ??
             "No synopsis information has been added to this title.",
@@ -32,7 +32,7 @@ class Anime {
             .cast<String>()
             .toList(),
         episodes = json["episodes"] ?? 0,
-        trailer = json["trailer"]["youtube_id"] ?? "-",
+        trailer = json["trailer"]["youtube_id"] ?? "<unknown>",
         status = json["status"],
         popularity = json["popularity"] ?? 0,
         score = json["score"] ?? 0,
