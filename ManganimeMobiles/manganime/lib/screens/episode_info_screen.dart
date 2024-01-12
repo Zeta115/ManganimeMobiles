@@ -104,7 +104,10 @@ class _EpisodeInfoScreenState extends State<EpisodeInfoScreen> {
                   sizedBox,
                   CollapsingHeader(
                     header: "Information",
-                    wid: Information(anime: anime),
+                    wid: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Information(anime: anime),
+                    ),
                   ),
                   const Divider(thickness: 2),
                   const CollapsingHeader(
