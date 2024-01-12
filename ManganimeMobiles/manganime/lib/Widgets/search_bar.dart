@@ -28,6 +28,12 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           onChanged: (_) {
             controller.openView();
           },
+          onSubmitted: (value) {
+            setState(() {
+              final search = controller.text.toLowerCase();
+              //
+            });
+          },
           trailing: const <Widget>[
             Icon(
               CustomIcons.search,

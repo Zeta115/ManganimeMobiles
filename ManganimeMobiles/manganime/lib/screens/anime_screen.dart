@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:manganime/Widgets/search_bar.dart';
 
 import 'package:manganime/api.dart';
+import 'package:manganime/custom_icons/search_icon.dart';
 import 'package:manganime/models/anime.dart';
 import 'package:manganime/widgets/anime_list.dart';
 import 'package:manganime/widgets/anime_header.dart';
@@ -29,7 +30,7 @@ class _AnimeScreenState extends State<AnimeScreen> {
         if (snapshot.hasError) {
           return ErrorWidget(snapshot.error.toString());
         }
-        if (!snapshot.hasData) {
+        if (!snapshot.hasData || snapshot.data!.isEmpty) {
           return const Center(
             child: CircularProgressIndicator(),
           );
@@ -42,6 +43,9 @@ class _AnimeScreenState extends State<AnimeScreen> {
         bool recent = true;
         bool popular = false;
         bool upcoming = false;
+
+        late List<Anime> filteredList;
+        List<Anime> listToShow = listRecent;
 
         return CustomScrollView(
           slivers: [
@@ -63,7 +67,66 @@ class _AnimeScreenState extends State<AnimeScreen> {
                             ),
                           ),
                         ),
-                        const SearchBarWidget(),
+                        //const SearchBarWidget(),
+                        SizedBox(
+                          width: 200,
+                          height: 30,
+                          child: SearchAnchor(builder: (BuildContext context,
+                              SearchController controller) {
+                            return SearchBar(
+                              controller: controller,
+                              padding:
+                                  const MaterialStatePropertyAll<EdgeInsets>(
+                                      EdgeInsets.symmetric(horizontal: 16.0)),
+                              onTap: () {
+                                controller.openView();
+                              },
+                              onChanged: (_) {
+                                controller.openView();
+                              },
+                              onSubmitted: (_) {
+                                setState(() {
+                                  final search = controller.text.toLowerCase();
+                                  filteredList = listRecent
+                                      .where(
+                                        (anime) => anime.title
+                                            .toLowerCase()
+                                            .contains(search),
+                                      ).toList();
+                                      
+
+                                  if (filteredList.isNotEmpty) {
+                                    listToShow = filteredList;
+                                  } else {
+                                    listToShow = listRecent;
+                                  }
+                                });
+                              },
+                              trailing: const <Widget>[
+                                Icon(
+                                  CustomIcons.search,
+                                  color: Colors.cyan,
+                                )
+                              ],
+                            );
+                          }, suggestionsBuilder: (BuildContext context,
+                              SearchController controller) {
+                            return List<ListTile>.generate(
+                              5,
+                              (int index) {
+                                final String item = listRecent[index].title;
+                                return ListTile(
+                                  title: Text(item),
+                                  onTap: () {
+                                    setState(() {
+                                      controller.closeView(item);
+                                    });
+                                  },
+                                );
+                              },
+                            );
+                          }),
+                        )
                       ],
                     ),
                   ),
@@ -132,7 +195,7 @@ class _AnimeScreenState extends State<AnimeScreen> {
               ),
             ),
             AnimeGrid(
-              animeList: listRecent,
+              animeList: listToShow,
             )
           ],
         );

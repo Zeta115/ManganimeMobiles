@@ -8,34 +8,52 @@ import 'dart:math';
 
 // ---Anime---
 Future<List<Anime>> apiAsyncLoadListAnimes(String link) async {
-  final url = Uri.parse(link);
-  final futureResponse = await http.get(url);
+  try {
+    final url = Uri.parse(link);
+    final futureResponse = await http.get(url);
+    if (futureResponse.statusCode != 200) {
+      debugPrint("Request failed with ${futureResponse.statusCode}");
+    }
 
-  final json = jsonDecode(futureResponse.body);
+    final json = jsonDecode(futureResponse.body);
 
-  final jsonAnimeList = json["data"];
+    final jsonAnimeList = json["data"];
 
-  final List<Anime> animeList = [];
+    final List<Anime> animeList = [];
 
-  for (final jsonAnime in jsonAnimeList) {
-    final anime = Anime.fromJson(jsonAnime);
-    animeList.add(anime);
+    for (final jsonAnime in jsonAnimeList) {
+      final anime = Anime.fromJson(jsonAnime);
+      animeList.add(anime);
+    }
+
+    debugPrint(animeList.toString());
+    return animeList;
+  } catch (e) {
+    debugPrint(e.toString());
+    return [];
   }
-
-  debugPrint(animeList.toString());
-  return animeList;
 }
 
 Future<List<List<Anime>>> apiAsyncLoadAllAnimes() async {
-  final animes1 =
-      await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/seasons/now");
-  //await Future.delayed(Duration(seconds: 2)); // In case it has to wait for api purposes
-  final animes2 =
-      await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/top/anime");
+  try {
+    final animes1 =
+        await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/seasons/now");
+    await Future.delayed(
+        const Duration(seconds: 2)); // In case it has to wait for api purposes
+    final animes2 =
+        await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/top/anime");
+    await Future.delayed(
+        const Duration(seconds: 2)); // In case it has to wait for api purposes
 
-  final animes3 =
-      await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/seasons/upcoming");
-  return [animes1, animes2, animes3];
+    final animes3 = await apiAsyncLoadListAnimes(
+      "https://api.jikan.moe/v4/seasons/upcoming",
+    );
+
+    return [animes1, animes2, animes3];
+  } catch (e) {
+    debugPrint(e.toString());
+    return [];
+  }
 }
 
 // Manga
