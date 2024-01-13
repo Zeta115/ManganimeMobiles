@@ -17,50 +17,48 @@ class UserListItem extends StatefulWidget {
 class _UserListItemState extends State<UserListItem> {
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+
     return SingleChildScrollView(
       child: Column(
         children: [
+          Align(
+            alignment: Alignment.topCenter,
+            child: Text(widget.defineduser.name,
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
           Row(
             children: [
               Align(
-                alignment: Alignment.topCenter,
-                child: Text(widget.defineduser.name,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold)),
-              ),
-              const Align(
-                alignment: Alignment.topCenter,
-                child: Text("/", style: TextStyle(fontSize: 30)),
-              ),
-              Align(
-                alignment: Alignment.topCenter,
-                child: Text(widget.defineduser.name_kanji,
-                    style: const TextStyle(fontSize: 20)),
-              ),
-            ],
-          ),
-          Align(
-            alignment: Alignment.topLeft,
-            child: Container(
-              height: 300,
-              width: 300,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.black26,
-                image: DecorationImage(
-                  image: NetworkImage(widget.defineduser.image),
-                  fit: BoxFit.fitWidth,
+                alignment: Alignment.topLeft,
+                child: Container(
+                  height: screenSize.height / 3,
+                  width: screenSize.width / 3,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.black26,
+                    image: DecorationImage(
+                      image: NetworkImage(widget.defineduser.image),
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.topRight,
-            child: Text(
-              widget.defineduser.about,
-              style: const TextStyle(fontSize: 10),
-              textAlign: TextAlign.center,
-            ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: Text(
+                    widget.defineduser.about,
+                    style: const TextStyle(fontSize: 12),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ],
           ),
           const Divider(
             height: 20,

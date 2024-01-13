@@ -80,9 +80,7 @@ Future<List<Manga>> apiAsyncLoadTopMangas() async {
 Future<List<User2>> apiAsyncLoadUser() async {
   final List<User2> userList = [];
 
-  final randomuserint = Random().nextInt(5) + 1;
-  final url =
-      Uri.parse("https://api.jikan.moe/v4/characters/$randomuserint/full");
+  final url = Uri.parse("https://api.jikan.moe/v4/characters/1/full");
 
   final futureResponse = await http.get(url);
 

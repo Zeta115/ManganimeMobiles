@@ -32,28 +32,7 @@ class UserScreen extends StatelessWidget {
           );
         }
         return Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 110,
-                    height: 50,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("assets/animeAppLogoFull.png"),
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  ),
-                  const SearchBarWidget(),
-                ],
-              ),
-            ),
-            //UserListItem(defineduser: defineduser)
-          ],
+          children: [UserListItem(defineduser: snapshot.data![0])],
         );
       },
     );

@@ -23,11 +23,16 @@ class CharacterScreen extends StatelessWidget {
             );
           }
 
-          return Column(
-            children: [
-              for (int index = 0; index < 10; ++index)
-                CharacterListItem(character: snapshot.data![index])
-            ],
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                for (int index = 0; index < snapshot.data!.length; ++index)
+                  CharacterListItem(
+                    character: snapshot.data![index],
+                    index: index,
+                  )
+              ],
+            ),
           );
         });
   }
