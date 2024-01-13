@@ -39,12 +39,10 @@ Future<List<List<Anime>>> apiAsyncLoadAllAnimes() async {
   try {
     final animes1 =
         await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/seasons/now");
-    await Future.delayed(
-        const Duration(seconds: 2)); // In case it has to wait for api purposes
+    //await Future.delayed(const Duration(seconds: 2)); // In case it has to wait for api purposes
     final animes2 =
         await apiAsyncLoadListAnimes("https://api.jikan.moe/v4/top/anime");
-    await Future.delayed(
-        const Duration(seconds: 2)); // In case it has to wait for api purposes
+    //await Future.delayed(const Duration(seconds: 2)); // In case it has to wait for api purposes
 
     /*final animes3 = await apiAsyncLoadListAnimes(
       "https://api.jikan.moe/v4/seasons/upcoming",
@@ -52,7 +50,7 @@ Future<List<List<Anime>>> apiAsyncLoadAllAnimes() async {
 
     return [animes1, animes2 /*, animes3*/];
   } catch (e) {
-    await Future.delayed(const Duration(seconds: 2));
+    //await Future.delayed(const Duration(seconds: 2));
     debugPrint(e.toString());
     return [];
   }
