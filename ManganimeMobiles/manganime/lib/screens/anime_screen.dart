@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:manganime/Widgets/search_bar.dart';
 
 import 'package:manganime/api.dart';
+import 'package:manganime/custom_icons/search_icon.dart';
 import 'package:manganime/models/anime.dart';
 import 'package:manganime/widgets/anime_list.dart';
 import 'package:manganime/widgets/anime_header.dart';
@@ -37,6 +38,8 @@ class _AnimeScreenState extends State<AnimeScreen> {
         final List<Anime> listRecent = snapshot.data![0];
         final List<Anime> listTop = snapshot.data![1];
         
+        late List<Anime> filteredList;
+        
         return CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
@@ -57,7 +60,65 @@ class _AnimeScreenState extends State<AnimeScreen> {
                             ),
                           ),
                         ),
-                        const SearchBarWidget(),
+                        //const SearchBarWidget(),
+
+                                                SizedBox(
+                          width: 200,
+                          height: 30,
+                          child: SearchAnchor(builder: (BuildContext context,
+                              SearchController controller) {
+                            return SearchBar(
+                              controller: controller,
+                              padding:
+                                  const MaterialStatePropertyAll<EdgeInsets>(
+                                      EdgeInsets.symmetric(horizontal: 16.0)),
+                              onTap: () {
+                                controller.openView();
+                              },
+                              onChanged: (_) {
+                                controller.openView();
+                              },
+                              onSubmitted: (_) {
+                                setState(() {
+                                  final search = controller.text.toLowerCase();
+                                  filteredList = listRecent
+                                      .where(
+                                        (anime) => anime.title
+                                            .toLowerCase()
+                                            .contains(search),
+                                      ).toList();
+                                      
+
+                                  if (filteredList.isNotEmpty) {
+                                  } else {
+                                  }
+                                });
+                              },
+                              trailing: const <Widget>[
+                                Icon(
+                                  CustomIcons.search,
+                                  color: Colors.cyan,
+                                )
+                              ],
+                            );
+                          }, suggestionsBuilder: (BuildContext context,
+                              SearchController controller) {
+                            return List<ListTile>.generate(
+                              5,
+                              (int index) {
+                                final String item = listRecent[index].title;
+                                return ListTile(
+                                  title: Text(item),
+                                  onTap: () {
+                                    setState(() {
+                                      controller.closeView(item);
+                                    });
+                                  },
+                                );
+                              },
+                            );
+                          }),
+                        )
                       ],
                     ),
                   ),
