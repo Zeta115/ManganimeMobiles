@@ -23,15 +23,19 @@ class _AcharacterListItemState extends State<AcharacterListItem> {
         Row(
           children: [
             Container(
-              height: 350,
-              width: 450,
+              color: Colors.black54,
+              height: 100,
+              width: 750,
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(5)),
                 image: DecorationImage(
                   image: NetworkImage(widget.acharacter.image),
                   fit: BoxFit.fitWidth,
                 ),
               ),
+            ),
+            Text(
+              widget.acharacter.name,
+              style: TextStyle(color: Colors.white, fontSize: 20),
             ),
           ],
         ),

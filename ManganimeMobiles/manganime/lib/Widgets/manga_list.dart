@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:manganime/Widgets/search_bar.dart';
 
 import 'package:manganime/models/manga.dart';
 
@@ -43,7 +42,7 @@ class _MangaListItemState extends State<MangaListItem> {
               ),
               ListTile(
                 title: Text(
-                  'Número de capítulos: ${widget.manga.chapters.toString()}',
+                  'Number of chapters: ${widget.manga.chapters.toString()}',
                 ),
               ),
               ListTile(

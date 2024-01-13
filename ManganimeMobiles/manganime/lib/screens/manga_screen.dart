@@ -12,7 +12,7 @@ class MangaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: apiAsyncLoadListMangas(),
+      future: apiAsyncLoadTopMangas(),
       builder: (
         BuildContext context,
         AsyncSnapshot<List<Manga>> snapshot,

@@ -49,41 +49,36 @@ Future<List<List<Anime>>> apiAsyncLoadAllAnimes() async {
       "https://api.jikan.moe/v4/seasons/upcoming",
     );*/
 
-    return [animes1, animes2/*, animes3*/];
+    return [animes1, animes2 /*, animes3*/];
   } catch (e) {
-    await Future.delayed(
-        const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     debugPrint(e.toString());
     return [];
   }
 }
 
 // Manga
-Future<List<Manga>> apiAsyncLoadListMangas() async {
-  final List<Manga> mangaList = [];
+Future<List<Manga>> apiAsyncLoadTopMangas() async {
+  final url = Uri.parse("https://api.jikan.moe/v4/top/manga");
+  final futureResponse = await http.get(url);
 
-  for (int listado = 1; listado < 2; listado++) {
-    final url = Uri.parse("https://api.jikan.moe/v4/manga/$listado/full");
-    final futureResponse = await http.get(url);
+  final json = jsonDecode(futureResponse.body);
 
-    final json = jsonDecode(futureResponse.body);
-    final jsonManga = json["data"];
+  final jsonMangaList = json["data"];
 
-    final manga = jsonManga != null ? Manga.fromJson(jsonManga) : null;
+  final List<Manga> mangaTop = [];
 
-    if (manga != null) {
-      mangaList.add(manga);
-      debugPrint(mangaList.toString());
-    } else {
-      listado = listado++;
-    }
+  for (final jsonManga in jsonMangaList) {
+    final manga = Manga.fromJson(jsonManga);
+    mangaTop.add(manga);
   }
 
-  return mangaList;
+  debugPrint(mangaTop.toString());
+  return mangaTop;
 }
 
-Future<List<User>> apiAsyncLoadUser() async {
-  final List<User> userList = [];
+Future<List<User2>> apiAsyncLoadUser() async {
+  final List<User2> userList = [];
 
   final randomuserint = Random().nextInt(5) + 1;
   final url =
@@ -94,7 +89,7 @@ Future<List<User>> apiAsyncLoadUser() async {
   final json = jsonDecode(futureResponse.body);
   final jsonUser = json["data"];
 
-  final user = jsonUser != null ? User.fromJson(jsonUser) : null;
+  final user = jsonUser != null ? User2.fromJson(jsonUser) : null;
 
   if (user != null) {
     userList.add(user);

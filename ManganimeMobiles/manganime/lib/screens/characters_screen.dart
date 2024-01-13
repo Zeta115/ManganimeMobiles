@@ -1,34 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:manganime/Widgets/search_bar.dart';
+import 'package:manganime/api.dart';
+import 'package:manganime/models/character.dart';
+import 'package:manganime/widgets/character_info.dart';
 
 class CharacterScreen extends StatelessWidget {
-  const CharacterScreen({super.key});
+  const CharacterScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: 110,
-                height: 50,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/animeAppLogoFull.png"),
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-              const SearchBarWidget(),
-            ],
-          ),
-        ),
-        //UserListItem(defineduser: defineduser)
-      ],
-    );
+    return Container(); /* FutureBuilder(
+        future: apiAsyncLoadListTopCharacters(),
+        builder: (
+          BuildContext context,
+          AsyncSnapshot<List<Acharacter>> snapshot,
+        ) {
+          if (!snapshot.hasData) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          return Provider.value(
+              value: snapshot.data!,
+              child: AcharacterListItem(acharacter: snapshot.data![]));
+        });*/
   }
 }
