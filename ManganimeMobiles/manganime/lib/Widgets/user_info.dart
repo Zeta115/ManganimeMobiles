@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:manganime/models/User.dart';
+import 'package:manganime/models/user.dart';
 
 class UserListItem extends StatefulWidget {
   const UserListItem({
@@ -8,7 +8,7 @@ class UserListItem extends StatefulWidget {
     required this.defineduser,
   }) : super(key: key);
 
-  final User defineduser;
+  final User2 defineduser;
 
   @override
   State<UserListItem> createState() => _UserListItemState();

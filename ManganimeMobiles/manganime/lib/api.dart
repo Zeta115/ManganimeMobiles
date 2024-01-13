@@ -62,8 +62,9 @@ Future<List<Manga>> apiAsyncLoadListMangas() async {
   return mangaList;
 }
 
-Future<List<User>> apiAsyncLoadUser() async {
-  final List<User> userList = [];
+// User
+Future<List<User2>> apiAsyncLoadUser() async {
+  final List<User2> userList = [];
 
   final randomuserint = Random().nextInt(5) + 1;
   final url =
@@ -74,7 +75,7 @@ Future<List<User>> apiAsyncLoadUser() async {
   final json = jsonDecode(futureResponse.body);
   final jsonUser = json["data"];
 
-  final user = jsonUser != null ? User.fromJson(jsonUser) : null;
+  final user = jsonUser != null ? User2.fromJson(jsonUser) : null;
 
   if (user != null) {
     userList.add(user);
@@ -83,3 +84,6 @@ Future<List<User>> apiAsyncLoadUser() async {
 
   return userList;
 }
+
+
+//https://api.jikan.moe/v4/top/characters

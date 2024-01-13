@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:manganime/api.dart';
 import 'package:manganime/models/user.dart';
+
 import 'package:manganime/widgets/user_info.dart';
+import 'package:manganime/Widgets/search_bar.dart';
 
 class UserScreen extends StatelessWidget {
   const UserScreen({Key? key});
 
+  get defineduser => null;
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<User>>(
+    return FutureBuilder<List<User2>>(
       future: apiAsyncLoadUser(),
       builder: (
         BuildContext context,
-        AsyncSnapshot<List<User>> snapshot,
+        AsyncSnapshot<List<User2>> snapshot,
       ) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
@@ -27,14 +31,30 @@ class UserScreen extends StatelessWidget {
             child: Text('No user data available'),
           );
         }
-
-        // Use the first user from the list (assuming you want only one)
-        final User defineduser = snapshot.data!.first;
-        return Container(
-          color: Colors.amber,
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 110,
+                    height: 50,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/animeAppLogoFull.png"),
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+                  const SearchBarWidget(),
+                ],
+              ),
+            ),
+            //UserListItem(defineduser: defineduser)
+          ],
         );
-
-        //return UserListItem(user: defineduser);
       },
     );
   }
