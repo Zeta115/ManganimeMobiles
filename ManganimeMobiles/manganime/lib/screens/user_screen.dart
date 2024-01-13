@@ -6,7 +6,7 @@ import 'package:manganime/widgets/user_info.dart';
 import 'package:manganime/Widgets/search_bar.dart';
 
 class UserScreen extends StatelessWidget {
-  const UserScreen({Key? key});
+  const UserScreen({super.key});
 
   get defineduser => null;
 

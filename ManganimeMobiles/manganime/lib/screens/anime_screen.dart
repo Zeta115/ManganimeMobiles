@@ -36,13 +36,7 @@ class _AnimeScreenState extends State<AnimeScreen> {
         }
         final List<Anime> listRecent = snapshot.data![0];
         final List<Anime> listTop = snapshot.data![1];
-        final List<Anime> listUpcoming = snapshot.data![1];
-        //final List<Anime> listByGenre = snapshot.data![1];
-
-        bool recent = true;
-        bool popular = false;
-        bool upcoming = false;
-
+        
         return CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
