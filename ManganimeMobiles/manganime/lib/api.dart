@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:manganime/models/anime.dart';
+import 'package:manganime/models/character.dart';
 import 'package:manganime/models/manga.dart';
 import 'package:manganime/models/user.dart';
 import 'dart:math';
@@ -85,5 +86,22 @@ Future<List<User2>> apiAsyncLoadUser() async {
   return userList;
 }
 
+Future<List<Acharacter>> apiAsyncLoadListTopCharacters() async {
+  final List<Acharacter> acharacterList = [];
 
+  final url = Uri.parse("https://api.jikan.moe/v4/top/characters");
+  final futureResponse = await http.get(url);
+
+  final json = jsonDecode(futureResponse.body);
+  final jsonAcharacter = json["data"];
+
+  final acharacter =
+      jsonAcharacter != null ? Acharacter.fromJson(jsonAcharacter) : null;
+  if (acharacter != null) {
+    acharacterList.add(acharacter);
+    debugPrint(acharacterList.toString());
+  }
+
+  return acharacterList;
+}
 //https://api.jikan.moe/v4/top/characters
