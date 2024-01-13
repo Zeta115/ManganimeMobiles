@@ -1,10 +1,9 @@
-class Acharacter {
+class Character {
   int id;
-  String name, image, nick;
+  String name, image;
 
-  Acharacter.fromJson(Map<String, dynamic> json)
+  Character.fromJson(Map<String, dynamic> json)
       : id = json["mal_id"],
         image = json["images"]["jpg"]["image_url"],
-        name = json["name"],
-        nick = json['nicknames'];
+        name = json["name"];
 }

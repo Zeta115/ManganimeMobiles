@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:manganime/Widgets/character_info.dart';
 
-import 'package:manganime/Widgets/search_bar.dart';
 import 'package:manganime/api.dart';
 import 'package:manganime/models/character.dart';
-import 'package:manganime/widgets/character_info.dart';
 
 class CharacterScreen extends StatelessWidget {
   const CharacterScreen({
@@ -13,11 +11,11 @@ class CharacterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(); /* FutureBuilder(
-        future: apiAsyncLoadListTopCharacters(),
+    return FutureBuilder(
+        future: apiAsyncLoadTopCharacters(),
         builder: (
           BuildContext context,
-          AsyncSnapshot<List<Acharacter>> snapshot,
+          AsyncSnapshot<List<Character>> snapshot,
         ) {
           if (!snapshot.hasData) {
             return const Center(
@@ -25,9 +23,12 @@ class CharacterScreen extends StatelessWidget {
             );
           }
 
-          return Provider.value(
-              value: snapshot.data!,
-              child: AcharacterListItem(acharacter: snapshot.data![]));
-        });*/
+          return Column(
+            children: [
+              for (int index = 0; index < 10; ++index)
+                CharacterListItem(character: snapshot.data![index])
+            ],
+          );
+        });
   }
 }
