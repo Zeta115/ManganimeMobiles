@@ -5,7 +5,6 @@ import 'package:manganime/models/anime.dart';
 import 'package:manganime/models/character.dart';
 import 'package:manganime/models/manga.dart';
 import 'package:manganime/models/user.dart';
-import 'dart:math';
 
 // ---Anime---
 Future<List<Anime>> apiAsyncLoadListAnimes(String link) async {

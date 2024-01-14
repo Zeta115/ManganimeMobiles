@@ -3,7 +3,6 @@ import 'package:manganime/api.dart';
 import 'package:manganime/models/user.dart';
 
 import 'package:manganime/widgets/user_info.dart';
-import 'package:manganime/Widgets/search_bar.dart';
 
 class UserScreen extends StatelessWidget {
   const UserScreen({super.key});

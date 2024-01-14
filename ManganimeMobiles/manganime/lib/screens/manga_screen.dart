@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:manganime/Widgets/search_bar.dart';
 
 import 'package:manganime/api.dart';
 import 'package:manganime/models/manga.dart';
